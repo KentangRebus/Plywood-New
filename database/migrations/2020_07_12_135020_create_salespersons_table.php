@@ -14,7 +14,7 @@ class CreateSalespersonsTable extends Migration
     public function up()
     {
         Schema::create('salespersons', function (Blueprint $table) {
-            $table->string('id');
+            $table->uuid('id');
             $table->string('name');
             $table->string('phone');
             $table->string('address');

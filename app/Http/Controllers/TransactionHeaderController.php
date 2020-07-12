@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Salesperson;
+use App\TransactionHeader;
 use Illuminate\Http\Request;
 
-class SalespersonsController extends Controller
+class TransactionHeaderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class SalespersonsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function show(Salesperson $salespersons)
+    public function show(TransactionHeader $transactionHeader)
     {
         //
     }
@@ -52,10 +52,10 @@ class SalespersonsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salesperson $salespersons)
+    public function edit(TransactionHeader $transactionHeader)
     {
         //
     }
@@ -64,10 +64,10 @@ class SalespersonsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salesperson $salespersons)
+    public function update(Request $request, TransactionHeader $transactionHeader)
     {
         //
     }
@@ -75,10 +75,10 @@ class SalespersonsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Salesperson $salespersons)
+    public function destroy(TransactionHeader $transactionHeader)
     {
         //
     }
