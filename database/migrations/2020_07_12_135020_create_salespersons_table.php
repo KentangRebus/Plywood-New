@@ -20,6 +20,8 @@ class CreateSalespersonsTable extends Migration
             $table->string('address');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->primary('id');
         });
     }
 

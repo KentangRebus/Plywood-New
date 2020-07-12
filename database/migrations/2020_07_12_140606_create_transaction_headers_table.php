@@ -22,6 +22,10 @@ class CreateTransactionHeadersTable extends Migration
             $table->integer('needs')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->primary('id');
+            $table->foreign('staff_id')->references('id')->on('users');
+            $table->foreign('sales_id')->references('id')->on('salespersons');
         });
     }
 
