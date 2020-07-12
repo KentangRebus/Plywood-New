@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreatePurchaseHeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('purchase_headers', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('username');
-            $table->string('password');
-            $table->string('role');
-            $table->rememberToken();
+            $table->string('staff_id');
+            $table->boolean('is_done');
+            $table->date('due_date')->nullable();
+            $table->integer('needs')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->primary('id');
+            $table->foreign('staff_id')->references('id')->on('users');
         });
     }
 
@@ -33,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('purchase_headers');
     }
 }
