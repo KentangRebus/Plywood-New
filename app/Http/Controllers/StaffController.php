@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Staffs;
 use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Staffs  $staffs
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $products)
+    public function show(Staffs $staffs)
     {
         //
     }
@@ -52,10 +52,10 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Staffs  $staffs
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $products)
+    public function edit(Staffs $staffs)
     {
         //
     }
@@ -64,10 +64,10 @@ class ProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $products
+     * @param  \App\Staffs  $staffs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $products)
+    public function update(Request $request, Staffs $staffs)
     {
         //
     }
@@ -75,10 +75,10 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $products
+     * @param  \App\Staffs  $staffs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $products)
+    public function destroy(Staffs $staffs)
     {
         //
     }

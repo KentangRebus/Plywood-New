@@ -8,7 +8,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#transaction-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Manage Transaction</span>
+                <span class="menu-title">Transaction</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-barcode menu-icon"></i>
             </a>
@@ -20,22 +20,14 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#product-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Manage Products</span>
-                <i class="menu-arrow"></i>
+            <a class="nav-link" href="{{route('product-view')}}">
+                <span class="menu-title">Products</span>
                 <i class="mdi mdi-cube menu-icon"></i>
             </a>
-            <div class="collapse" id="product-pages">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Add Products</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Update Products</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Delete Transaction</a></li>
-                </ul>
-            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#purchase-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Manage Purchase</span>
+                <span class="menu-title">Purchase</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>
             </a>

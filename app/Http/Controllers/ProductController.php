@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Salesperson;
+use App\Product;
 use Illuminate\Http\Request;
 
-class SalespersonsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SalespersonsController extends Controller
      */
     public function index()
     {
-        //
+        return view('product.index');
     }
 
     /**
@@ -41,10 +41,10 @@ class SalespersonsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(Salesperson $salespersons)
+    public function show(Product $products)
     {
         //
     }
@@ -52,10 +52,10 @@ class SalespersonsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salesperson $salespersons)
+    public function edit(Product $products)
     {
         //
     }
@@ -64,10 +64,10 @@ class SalespersonsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salesperson $salespersons)
+    public function update(Request $request, Product $products)
     {
         //
     }
@@ -75,10 +75,10 @@ class SalespersonsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Salesperson  $salespersons
+     * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Salesperson $salespersons)
+    public function destroy(Product $products)
     {
         //
     }

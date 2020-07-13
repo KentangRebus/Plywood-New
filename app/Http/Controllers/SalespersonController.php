@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Staffs;
+use App\Salesperson;
 use Illuminate\Http\Request;
 
-class StaffsController extends Controller
+class SalespersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class StaffsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Staffs  $staffs
+     * @param  \App\Salesperson  $salespersons
      * @return \Illuminate\Http\Response
      */
-    public function show(Staffs $staffs)
+    public function show(Salesperson $salespersons)
     {
         //
     }
@@ -52,10 +52,10 @@ class StaffsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Staffs  $staffs
+     * @param  \App\Salesperson  $salespersons
      * @return \Illuminate\Http\Response
      */
-    public function edit(Staffs $staffs)
+    public function edit(Salesperson $salespersons)
     {
         //
     }
@@ -64,10 +64,10 @@ class StaffsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Staffs  $staffs
+     * @param  \App\Salesperson  $salespersons
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Staffs $staffs)
+    public function update(Request $request, Salesperson $salespersons)
     {
         //
     }
@@ -75,10 +75,10 @@ class StaffsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Staffs  $staffs
+     * @param  \App\Salesperson  $salespersons
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Staffs $staffs)
+    public function destroy(Salesperson $salespersons)
     {
         //
     }
