@@ -2,12 +2,12 @@
   'use strict';
   $(function() {
 
-    // Remove pro banner on close
-    document.querySelector('#bannerClose').addEventListener('click',function() {
-      document.querySelector('#proBanner').classList.add('d-none');
-    });
-    
-    Chart.defaults.global.legend.labels.usePointStyle = true;
+    // // Remove pro banner on close
+    // document.querySelector('#bannerClose').addEventListener('click',function() {
+    //   document.querySelector('#proBanner').classList.add('d-none');
+    // });
+    //
+    // Chart.defaults.global.legend.labels.usePointStyle = true;
     
     if ($("#serviceSaleProgress").length) {
       var bar = new ProgressBar.Circle(serviceSaleProgress, {
