@@ -1,4 +1,3 @@
-<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
@@ -8,43 +7,44 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+            <a class="nav-link" data-toggle="collapse" href="#transaction-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Manage Transaction</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
+                <i class="mdi mdi-barcode menu-icon"></i>
             </a>
-            <div class="collapse" id="general-pages">
+            <div class="collapse" id="transaction-pages">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Add Transaction</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Update Transaction</a></li>
                     <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Delete Transaction</a></li>
                 </ul>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="menu-title">Icons</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#product-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">Manage Products</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-cube menu-icon"></i>
             </a>
+            <div class="collapse" id="product-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Add Products</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Update Products</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Delete Transaction</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
-                <span class="menu-title">Forms</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#purchase-pages" aria-expanded="false" aria-controls="general-pages">
+                <span class="menu-title">Manage Purchase</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
             </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/charts/chartjs.html">
-                <span class="menu-title">Charts</span>
-                <i class="mdi mdi-chart-bar menu-icon"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
-                <span class="menu-title">Tables</span>
-                <i class="mdi mdi-table-large menu-icon"></i>
-            </a>
+            <div class="collapse" id="purchase-pages">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Add Purchase</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">Delete Purchase</a></li>
+                </ul>
+            </div>
         </li>
     </ul>
 </nav>
-<!-- partial -->
