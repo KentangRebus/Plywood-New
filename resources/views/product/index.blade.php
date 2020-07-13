@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
-                <button class="btn btn-gradient-success">+ Add Products</button>
+                <a href="{{route('product-insert-view')}}"><button class="btn btn-gradient-success">+ Add Products</button></a>
                 <form action="#">
                     <div class="">
                         <div class="input-group">
@@ -43,13 +43,13 @@
                     <td>Rp. 900,000</td>
                     <td>Rp. 900,000</td>
                     <td class="row">
-                        <form action="" method="post" class="mx-2">
-                            <button type="button" class="btn btn-gradient-info btn-rounded btn-icon">
+                        <form action="{{route('product-update-view', ['id'=>'1'])}}" method="get" class="mx-2">
+                            <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
                                 <i class="mdi mdi-lead-pencil"></i>
                             </button>
                         </form>
                         <form action="" method="post">
-                            <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon">
+                            <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon">
                                 <i class="mdi mdi-close"></i>
                             </button>
                         </form>

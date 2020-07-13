@@ -1,37 +1,66 @@
 
 @extends('layout.default_layout')
 
-@section('title', 'Porduct')
+@section('title', 'Product')
 
 @section('content')
     <div class="page-header">
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                      <i class="mdi mdi-home"></i>
-                    </span> Dashboard </h3>
+                      <i class="mdi mdi-cube"></i>
+                    </span> Add New Product </h3>
     </div>
-    <div class="row">
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                    <img src="{{asset('images/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Today Profits<i class="mdi mdi-currency-usd mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">Rp. 15,0000</h2>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 stretch-card grid-margin">
-            <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                    <img src="{{asset('images/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
-                    <h4 class="font-weight-normal mb-3">Number of Transactions<i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                    </h4>
-                    <h2 class="mb-5">45,6334</h2>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+        <div class="card-body">
+            <form class="forms-sample">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputCode">Code</label>
+                            <input name="code" type="text" class="form-control" id="inputCode" placeholder="Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input name="name" type="text" class="form-control" id="inputName" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputType">Type</label>
+                            <input name="type" type="text" class="form-control" id="inputType" placeholder="Type">
+                        </div>
 
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputUnit">Unit</label>
+                            <input name="unit" type="text" class="form-control" id="inputUnit" placeholder="Unit">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputColor">Color</label>
+                            <input name="color" type="text" class="form-control" id="inputColor" placeholder="Color">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputStock">Stock</label>
+                    <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Number of Stocks" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputBuy">Buy Price</label>
+                    <input name="buyPrice" min="0" type="number" class="form-control" id="inputBuy" placeholder="Rp." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputSell">Sell Price</label>
+                    <input name="sellPrice" min="0" type="number" class="form-control" id="inputSell" placeholder="Rp." required>
+                </div>
+
+                <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+            </form>
+        </div>
     </div>
+
 @endsection
 

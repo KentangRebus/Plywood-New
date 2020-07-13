@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.insert');
     }
 
     /**
@@ -55,9 +55,9 @@ class ProductController extends Controller
      * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $products)
+    public function edit($id)
     {
-        //
+        return view('product.update');
     }
 
     /**

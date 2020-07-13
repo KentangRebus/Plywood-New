@@ -19,3 +19,6 @@ Route::get('/', function () {
 
 
 Route::get('/product', 'ProductController@index')->name('product-view');
+Route::get('/product/add', 'ProductController@create')->name('product-insert-view');
+Route::get('/product/update/{id}', 'ProductController@edit')->name('product-update-view');
+

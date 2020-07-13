@@ -16,7 +16,7 @@
     @include('nav.topnav', ['data' => 'this is the data'])
     <div class="container-fluid page-body-wrapper">
         @include('nav.sidenav')
-        <div class="main-panel">
+        <div class="main-panel ml-auto">
             <div class="content-wrapper">
                 @yield('content')
             </div>
