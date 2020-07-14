@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data = Product::orderBy('stock', 'asc')->get();
+        $data = Product::orderBy('stock', 'asc')->paginate(10);
 
         foreach ($data as $d) {
             $formated_name = json_decode($d->name);
@@ -73,7 +73,7 @@ class ProductController extends Controller
         foreach ($query as $q) {
             $formated_query .= "%$q%";
         }
-        $data = Product::where('name', 'like', $formated_query)->orderBy('stock', 'asc')->get();
+        $data = Product::where('name', 'like', $formated_query)->orderBy('stock', 'asc')->paginate(10);
         foreach ($data as $d) {
             $formated_name = json_decode($d->name);
             $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
