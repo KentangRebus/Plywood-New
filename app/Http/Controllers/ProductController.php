@@ -64,15 +64,26 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $products)
+    public function show(Request $request)
     {
-        //
+//        dd($request['query']);
+        $query = explode(' ', $request['query']);
+        $formated_query = '';
+
+        foreach ($query as $q) {
+            $formated_query .= "%$q%";
+        }
+        $data = Product::where('name', 'like', $formated_query)->orderBy('stock', 'asc')->get();
+        foreach ($data as $d) {
+            $formated_name = json_decode($d->name);
+            $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
+        }
+
+        return view('product.index')->with(['data'=>$data, 'query' => $request['query']]);
+    }
+
+    public function filterQuery($value, $key, $query){
+        return !strpos($value, $query);
     }
 
     /**

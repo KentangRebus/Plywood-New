@@ -22,13 +22,16 @@
             </div>
             <div class="d-flex justify-content-between mb-3">
                 <a href="{{route('product-insert-view')}}"><button class="btn btn-gradient-success">+ Add Products</button></a>
-                <form action="#">
-                    <div class="">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Product Name" aria-label="Product Name" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-sm btn-gradient-primary" type="button">Search</button>
-                            </div>
+                <form action="{{route('product-search')}}" method="post">
+                    @csrf
+                    <div class="input-group">
+                        @if(!empty($query))
+                            <input name="query" type="text" class="form-control" placeholder="Product Name" aria-label="Product Name" aria-describedby="basic-addon2" value="{{$query}}">
+                        @else
+                            <input name="query" type="text" class="form-control" placeholder="Product Name" aria-label="Product Name" aria-describedby="basic-addon2">
+                        @endif
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
                         </div>
                     </div>
                 </form>
