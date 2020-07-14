@@ -13,6 +13,14 @@
     </div>
     <div class="card">
         <div class="card-body">
+            <div>
+                @if (session()->has('msg'))
+                    <div class="alert alert-success">
+                        {{ session()->get('msg') }}
+                    </div>
+                @endif
+            </div>
+
             <a href="{{route('purchase-insert-view')}}"><button class="btn btn-gradient-success">+ Add Purchase</button></a>
 
             <div class="mt-3">

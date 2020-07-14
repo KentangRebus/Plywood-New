@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\PurchaseDetail;
 use App\PurchaseHeader;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,53 @@ class PurchaseHeaderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+//        dd($request);
+//        create Purchase header
+        $purchaseHeader = new PurchaseHeader();
+        $purchaseHeader->is_done = $request->paymentStatus == "Lunas" ? true : false;
+        if ($request->paymentStatus == "Hutang"){
+            $purchaseHeader->due_date = $request->dueDate;
+            $purchaseHeader->needs = $request->need;
+        }
+        $purchaseHeader->save();
+
+        $form_data = json_decode($request->formData);
+//        dd($form_data);
+//        Manage new Product
+        foreach ($form_data as $data){
+            if (!empty($data->id)) {
+                $prod = Product::where('id', '=', $data->id)->first();
+                $prod->stock += $data->stock;
+                $prod->save();
+
+                $detailPurchase = new PurchaseDetail();
+                $detailPurchase->id = $purchaseHeader->fresh()->id;
+                $detailPurchase->product_id = $data->id;
+                $detailPurchase->quantity = $data->stock;
+                $detailPurchase->price = $data->buyPrice;
+                $detailPurchase->save();
+
+            }
+            else {
+                $prod = new Product();
+                $prod->name = "$data->name $data->code $data->color $data->type $data->unit";
+                $prod->stock = $data->stock;
+                $prod->min_stock = $data->minStock;
+                $prod->buy_price = $data->buyPrice;
+                $prod->sell_price = $data->sellPrice;
+                $prod->save();
+
+                $detailPurchase = new PurchaseDetail();
+                $detailPurchase->id = $purchaseHeader->fresh()->id;
+                $detailPurchase->product_id = $prod->fresh()->id;
+                $detailPurchase->quantity = $data->stock;
+                $detailPurchase->price = $data->buyPrice;
+                $detailPurchase->save();
+            }
+        }
+
+        return redirect()->route('purchase-view')->with(['msg' => "Purchase transaction has been recorded"]);
     }
 
     /**
