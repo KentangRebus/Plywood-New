@@ -122,8 +122,11 @@ class ProductController extends Controller
      * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $products)
+    public function destroy(Request $request)
     {
-        //
+        $product = Product::where('id', '=', $request->id)->first();
+        $product->delete();
+
+        return redirect()->route('product-view')->with(['msg' => "Product has been deleted"]);
     }
 }

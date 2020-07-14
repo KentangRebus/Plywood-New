@@ -61,11 +61,11 @@
                                     <i class="mdi mdi-lead-pencil"></i>
                                 </button>
                             </form>
-                            <form action="" method="post">
-                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon">
+                            <div>
+                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal" onclick="onclickModal({{$d}})">
                                     <i class="mdi mdi-close"></i>
                                 </button>
-                            </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -74,5 +74,34 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Delete this product?</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <form id="deleteForm" action="" method="post">
+                    @csrf
+                    <input id="inputId" type="hidden" name="id" value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script !src="">
+        function onclickModal(obj) {
+            console.log('Object to delete', obj)
+            $('.modal-body').text(obj.name)
+            $('#inputId').val(obj.id)
+            $('#deleteForm').attr('action', '{{route('product-delete')}}');
+        }
+    </script>
     @endsection
 
