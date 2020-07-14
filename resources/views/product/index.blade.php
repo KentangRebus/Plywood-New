@@ -14,9 +14,9 @@
     <div class="card">
         <div class="card-body">
             <div>
-                @if ($msg)
+                @if (session()->has('msg'))
                     <div class="alert alert-success">
-                        {{$msg}}
+                        {{ session()->get('msg') }}
                     </div>
                 @endif
             </div>
@@ -45,25 +45,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="text-truncate" title="">Batu Marmer  Batu Marmer</td>
-                    <td >20</td>
-                    <td>Rp. 900,000</td>
-                    <td>Rp. 900,000</td>
-                    <td class="row">
-                        <form action="{{route('product-update-view', ['id'=>'1'])}}" method="get" class="mx-2">
-                            <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
-                                <i class="mdi mdi-lead-pencil"></i>
-                            </button>
-                        </form>
-                        <form action="" method="post">
-                            <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon">
-                                <i class="mdi mdi-close"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-
+                @foreach($data as $d)
+                    @if($d->stock <= $d->min_stock)
+                        <tr class="table-danger">
+                    @else
+                        <tr>
+                    @endif
+                        <td class="text-truncate" title="{{$d->name}}">{{$d->name}}</td>
+                        <td >{{$d->stock}}</td>
+                        <td>Rp. {{$d->buy_price}}</td>
+                        <td>Rp. {{$d->sell_price}}</td>
+                        <td class="row">
+                            <form action="{{route('product-update-view', ['id'=>$d->id])}}" method="get" class="mx-2">
+                                <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
+                                    <i class="mdi mdi-lead-pencil"></i>
+                                </button>
+                            </form>
+                            <form action="" method="post">
+                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon">
+                                    <i class="mdi mdi-close"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

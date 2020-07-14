@@ -14,7 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        $data = Product::orderBy('stock', 'asc')->get();
+
+        foreach ($data as $d) {
+            $formated_name = json_decode($d->name);
+            $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
+        }
+
+        return view('product.index')->with(['data'=>$data]);
     }
 
     /**
@@ -53,7 +60,7 @@ class ProductController extends Controller
         $product->min_stock = $request->minStock;
         $product->save();
 
-        return view('product.index')->with(['msg' => "New product has been added"]);
+        return redirect()->route('product-view')->with(['msg' => "New product has been added"]);
     }
 
 
