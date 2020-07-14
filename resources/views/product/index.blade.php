@@ -4,6 +4,7 @@
 @section('title', 'Product')
 
 @section('content')
+
     <div class="page-header">
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
@@ -12,6 +13,13 @@
     </div>
     <div class="card">
         <div class="card-body">
+            <div>
+                @if ($msg)
+                    <div class="alert alert-success">
+                        {{$msg}}
+                    </div>
+                @endif
+            </div>
             <div class="d-flex justify-content-between mb-3">
                 <a href="{{route('product-insert-view')}}"><button class="btn btn-gradient-success">+ Add Products</button></a>
                 <form action="#">

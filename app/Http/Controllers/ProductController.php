@@ -35,8 +35,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        $name = [
+            'code' => $request->code,
+            'name' => $request->name,
+            'type' => $request->type,
+            'unit' => $request->unit,
+            'color' => $request->color,
+        ];
+//        dd($name);
+
+        $product = new Product();
+        $product->name = json_encode($name);
+        $product->buy_price = $request->buyPrice;
+        $product->sell_price = $request->sellPrice;
+        $product->stock = $request->stock;
+        $product->min_stock = $request->minStock;
+        $product->save();
+
+        return view('product.index')->with(['msg' => "New product has been added"]);
     }
+
 
     /**
      * Display the specified resource.

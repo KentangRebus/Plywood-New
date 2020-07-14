@@ -12,7 +12,8 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <form class="forms-sample">
+            <form class="forms-sample" method="post" action="{{route('product-insert')}}">
+                @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -45,6 +46,11 @@
                 <div class="form-group">
                     <label for="inputStock">Stock</label>
                     <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Number of Stocks" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputMinStock">Minimum Stock</label>
+                    <input name="minStock" min="1" type="number" class="form-control" id="inputMinStock" placeholder="Minimum Stock" required>
                 </div>
 
                 <div class="form-group">
