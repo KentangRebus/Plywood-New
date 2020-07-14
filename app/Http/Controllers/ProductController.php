@@ -129,7 +129,7 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+ *
      * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */

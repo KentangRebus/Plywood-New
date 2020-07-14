@@ -15,7 +15,6 @@ class CreatePurchaseHeadersTable extends Migration
     {
         Schema::create('purchase_headers', function (Blueprint $table) {
             $table->uuid('id');
-            $table->string('staff_id');
             $table->boolean('is_done');
             $table->date('due_date')->nullable();
             $table->integer('needs')->nullable();
@@ -23,7 +22,6 @@ class CreatePurchaseHeadersTable extends Migration
             $table->softDeletes();
 
             $table->primary('id');
-            $table->foreign('staff_id')->references('id')->on('users');
         });
     }
 

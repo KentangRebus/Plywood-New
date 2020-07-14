@@ -24,7 +24,7 @@ class PurchaseHeaderController extends Controller
      */
     public function create()
     {
-        //
+        return view('purchase.insert');
     }
 
     /**
@@ -82,4 +82,5 @@ class PurchaseHeaderController extends Controller
     {
         //
     }
+
 }

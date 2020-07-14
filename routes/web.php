@@ -27,6 +27,8 @@ Route::post('/product/update/{id}', 'ProductController@update')->name('product-u
 Route::post('/product/delete', 'ProductController@destroy')->name('product-delete');
 Route::post('/product/search', 'ProductController@show')->name('product-search');
 
+Route::post('/product/autocomplete', 'SearchController@searchProduct')->name('product-autocomplete');
 
 Route::get('/purchase', 'PurchaseHeaderController@index')->name('purchase-view');
+Route::get('/purchase/add', 'PurchaseHeaderController@create')->name('purchase-insert-view');
 
