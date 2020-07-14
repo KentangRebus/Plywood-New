@@ -83,7 +83,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        return view('product.update');
+        $data = Product::where('id', '=', $id)->first();
+        $data->name = json_decode($data->name);
+        return view('product.update')->with(['data'=>$data]);
     }
 
     /**
@@ -93,9 +95,25 @@ class ProductController extends Controller
      * @param  \App\Product  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $products)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::where('id', '=', $id)->first();
+
+        $name = [
+            'code' => $request->code,
+            'name' => $request->name,
+            'type' => $request->type,
+            'unit' => $request->unit,
+            'color' => $request->color,
+        ];
+        $product->name = json_encode($name);
+        $product->buy_price = $request->buyPrice;
+        $product->sell_price = $request->sellPrice;
+        $product->stock = $request->stock;
+        $product->min_stock = $request->minStock;
+        $product->save();
+
+        return redirect()->route('product-view')->with(['msg' => "Product has been updated"]);
     }
 
     /**

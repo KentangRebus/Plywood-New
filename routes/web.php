@@ -23,4 +23,6 @@ Route::get('/product/add', 'ProductController@create')->name('product-insert-vie
 Route::get('/product/update/{id}', 'ProductController@edit')->name('product-update-view');
 
 Route::post('/product/add', 'ProductController@store')->name('product-insert');
+Route::post('/product/update/{id}', 'ProductController@update')->name('product-update');
+
 
