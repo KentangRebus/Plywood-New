@@ -54,13 +54,14 @@
                 </div>
             </div>
             <hr>
-            <div>
+            <div class="form-group">
                 <table class="table table-hover" style="table-layout: fixed;">
                     <thead>
                     <tr>
                         <th class="w-50">Name</th>
                         <th>Quantity</th>
                         <th>Buy Price</th>
+                        <th>Subtotal</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -80,10 +81,28 @@
                             <td>
                                 Rp. {{number_format($d->price)}}
                             </td>
+                            <td>
+                                Rp. {{number_format($d->price * $d->quantity)}}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="form-group d-flex justify-content-end">
+                <div>
+                    <h4>
+                       Total: Rp. {{number_format($total, 0)}}
+                    </h4>
+                </div>
+            </div>
+            <div class="form-group">
+                @if($data->is_done == 0)
+                    <form action="{{route('purchase-paid', ['id'=>$data->id])}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-block btn-gradient-success">Paid</button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

@@ -34,4 +34,5 @@ Route::get('/purchase/add', 'PurchaseHeaderController@create')->name('purchase-i
 Route::get('/purchase/{id}', 'PurchaseHeaderController@show')->name('purchase-detail-view');
 
 Route::post('/purchase/add', 'PurchaseHeaderController@store')->name('purchase-insert');
+Route::post('/purchase/paid/{id}', 'PurchaseHeaderController@paid')->name('purchase-paid');
 

@@ -104,18 +104,23 @@ class PurchaseHeaderController extends Controller
     public function show($id)
     {
         $data = PurchaseHeader::where('id', '=', $id)->first();
-        return view('purchase.detail')->with(['data'=>$data]);
+        $total = 0;
+        foreach ($data->details as $d) {
+            $total += $d->quantity * $d->price;
+        }
+        return view('purchase.detail')->with(['data'=>$data, "total"=>$total]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\PurchaseHeader  $purchaseHeader
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PurchaseHeader $purchaseHeader)
+
+    public function paid($id)
     {
-        //
+        $purchase = PurchaseHeader::where('id', '=', $id)->first();
+        $purchase->is_done = true;
+        $purchase->needs = 0;
+        $purchase->due_date = null;
+        $purchase->save();
+
+        return redirect()->route('purchase-view')->with(['msg' => "Purchase transaction has been paid"]);
     }
 
     /**
