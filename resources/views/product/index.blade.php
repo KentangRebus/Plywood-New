@@ -56,8 +56,8 @@
                     @endif
                         <td class="text-truncate" title="{{$d->name}}">{{$d->name}}</td>
                         <td >{{$d->stock}}</td>
-                        <td>Rp. {{$d->buy_price}}</td>
-                        <td>Rp. {{$d->sell_price}}</td>
+                        <td>Rp. {{number_format($d->buy_price,0)}}</td>
+                        <td>Rp. {{number_format($d->sell_price,0)}}</td>
                         <td class="row">
                             <form action="{{route('product-update-view', ['id'=>$d->id])}}" method="get" class="mx-2">
                                 <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">

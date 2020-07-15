@@ -104,8 +104,7 @@ class PurchaseHeaderController extends Controller
     public function show($id)
     {
         $data = PurchaseHeader::where('id', '=', $id)->first();
-        dd($data);
-        return view();
+        return view('purchase.detail')->with(['data'=>$data]);
     }
 
     /**
