@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/materialdesignicons.min.css')}}">
+    <link rel="shortcut icon" href="{{asset('images/logo-mini.svg')}}">
     <script src="{{asset('js/jquery-3.5.1.min.js')}}"></script>
     <title>@yield('title')</title>
 </head>

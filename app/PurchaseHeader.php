@@ -17,7 +17,7 @@ class PurchaseHeader extends Model
     public $incrementing = false;
 
     public function details() {
-        return $this->hasMany('App\PurchaseDetail');
+        return $this->hasMany('App\PurchaseDetail', 'id', 'id');
     }
 
 }

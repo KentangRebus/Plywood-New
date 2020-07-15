@@ -17,6 +17,6 @@ class TransactionHeader extends Model
     public $incrementing = false;
 
     public function details() {
-        return $this->hasMany('App\TransactionDetail');
+        return $this->hasMany('App\TransactionDetail', 'id', 'id');
     }
 }
