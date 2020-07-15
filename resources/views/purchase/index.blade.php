@@ -81,11 +81,9 @@
                                         </button>
                                     </a>
                                 </div>
-                                <form action="">
-                                    <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal">
-                                        <i class="mdi mdi-close"></i>
-                                    </button>
-                                </form>
+                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal" onclick="deletePurchaseData('{{$d->id}}')">
+                                    <i class="mdi mdi-close"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -95,9 +93,33 @@
                     {{$data->links()}}
                 </div>
             </div>
-
         </div>
     </div>
 
-    @endsection
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Delete this transaction?</h4>
+                </div>
+                <form id="deleteForm" action="{{route('purchase-delete')}}" method="post">
+                    @csrf
+                    <input id="inputId" type="hidden" name="id" value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script !src="">
+        function deletePurchaseData(id) {
+            $('#inputId').val('');
+            $('#inputId').val(id);
+        }
+    </script>    
+    
+@endsection
 

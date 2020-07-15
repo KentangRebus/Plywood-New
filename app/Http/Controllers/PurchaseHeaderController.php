@@ -141,9 +141,22 @@ class PurchaseHeaderController extends Controller
      * @param  \App\PurchaseHeader  $purchaseHeader
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseHeader $purchaseHeader)
+    public function destroy(Request $request)
     {
-        //
+//        dd($request->id);
+//        decrease inserted stock
+        $data = PurchaseHeader::where('id', '=', $request->id)->first();
+        $detail = $data->details;
+
+        foreach ($detail as $d) {
+            $prod = Product::where('id', '=', $d->product_id)->first();
+            $prod->stock = $prod->stock - $d->quantity;
+            $prod->save();
+        }
+//        soft delete header and detail
+        $data->delete();
+
+        return redirect()->route('purchase-view')->with(['msg' => "Purchase transaction has been deleted"]);
     }
 
 }
