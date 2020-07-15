@@ -17,6 +17,7 @@ class ProductController extends Controller
         $data = Product::orderBy('stock', 'asc')->paginate(10);
 
         foreach ($data as $d) {
+//            dd($d->name);
             $formated_name = json_decode($d->name);
             $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
         }

@@ -31,6 +31,7 @@ Route::post('/product/autocomplete', 'SearchController@searchProduct')->name('pr
 
 Route::get('/purchase', 'PurchaseHeaderController@index')->name('purchase-view');
 Route::get('/purchase/add', 'PurchaseHeaderController@create')->name('purchase-insert-view');
+Route::get('/purchase/{id}', 'PurchaseHeaderController@show')->name('purchase-detail-view');
 
 Route::post('/purchase/add', 'PurchaseHeaderController@store')->name('purchase-insert');
 

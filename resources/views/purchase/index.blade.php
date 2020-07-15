@@ -28,7 +28,7 @@
                     <thead>
                     <tr>
                         <th>Time</th>
-                        <th>Code</th>
+                        <th class="w-25">Code</th>
                         <th>Status</th>
                         <th>Need</th>
                         <th>Due Date</th>
@@ -36,23 +36,64 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($data as $d)
+                        @if(\Carbon\Carbon::now()->add(3, 'day')->gte($d->due_date) && $d->is_done == 0)
+                        <tr class="table-danger">
+                        @else
                         <tr>
-                            <td class="" title=""></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        @endif
+                            <td>{{$d->created_at}}</td>
+                            <td class="text-truncate">{{$d->id}}</td>
+                            <td>
+                                @if($d->is_done == 1)
+                                    <label class="badge badge-success">Lunas</label>
+                                @else
+                                    <label class="badge badge-danger">Hutang</label>
+                                @endif
+                            </td>
+                            <td>
+                                @if($d->is_done == 1)
+                                    <div class="text-success">
+                                    -
+                                    </div>
+                                @else
+                                    <div class="text-danger">
+                                        - Rp. {{$d->needs}}
+                                    </div>
+                                @endif
+                            </td>
+                            <td>
+                                @if($d->is_done == 1)
+                                    <div class="text-success">
+                                        -
+                                    </div>
+                                @else
+                                    <div class="text-danger">
+                                        {{$d->due_date}}
+                                    </div>
+                                @endif
+                            </td>
                             <td class="row">
-                                <button type="submit" class="btn btn-gradient-dark btn-rounded btn-icon">
-                                    <i class="mdi mdi-information-variant"></i>
-                                </button>
-                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal">
-                                    <i class="mdi mdi-close"></i>
-                                </button>
+                                <div class="mx-2">
+                                    <a href="{{route('purchase-detail-view', ['id' => $d->id])}}">
+                                        <button type="submit" class="btn btn-gradient-dark btn-rounded btn-icon">
+                                            <i class="mdi mdi-information-variant"></i>
+                                        </button>
+                                    </a>
+                                </div>
+                                <form action="">
+                                    <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal">
+                                        <i class="mdi mdi-close"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                <div>
+                    {{$data->links()}}
+                </div>
             </div>
 
         </div>

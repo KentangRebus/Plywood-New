@@ -16,7 +16,8 @@ class PurchaseHeaderController extends Controller
      */
     public function index()
     {
-        return view('purchase.index');
+        $data = PurchaseHeader::orderBy('is_done', 'asc')->orderBy('created_at', 'desc')->orderBy('due_date', 'desc')->paginate(10);
+        return view('purchase.index')->with(['data'=>$data]);
     }
 
     /**
@@ -67,7 +68,15 @@ class PurchaseHeaderController extends Controller
             }
             else {
                 $prod = new Product();
-                $prod->name = "$data->name $data->code $data->color $data->type $data->unit";
+                $format_name = [
+                    'code' => $data->code,
+                    'name' => $data->name,
+                    'type' => $data->type,
+                    'unit' => $data->unit,
+                    'color' => $data->color,
+                ];
+
+                $prod->name = json_encode($format_name);
                 $prod->stock = $data->stock;
                 $prod->min_stock = $data->minStock;
                 $prod->buy_price = $data->buyPrice;
@@ -92,9 +101,11 @@ class PurchaseHeaderController extends Controller
      * @param  \App\PurchaseHeader  $purchaseHeader
      * @return \Illuminate\Http\Response
      */
-    public function show(PurchaseHeader $purchaseHeader)
+    public function show($id)
     {
-        //
+        $data = PurchaseHeader::where('id', '=', $id)->first();
+        dd($data);
+        return view();
     }
 
     /**
