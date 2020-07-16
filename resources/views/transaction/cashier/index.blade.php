@@ -53,11 +53,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputQuantity">Quantity</label>
-                            <input name="quantity" min="1" type="number" class="form-control" id="inputNewStock" placeholder="Quantity" required>
+                            <input name="quantity" min="1" max="10" type="number" class="form-control" id="inputQuantity" placeholder="Quantity" required>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <input type="hidden" name="canAdd" id="canAdd">
+                        <input type="hidden" name="canAdd" id="canAdd" value="false">
                         <button type="button" class="btn btn-block btn-gradient-success mr-2" onclick="addProduct()">Add</button>
                     </div>
                 </div>
@@ -73,7 +73,8 @@
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody id="purchaseProductList">
+                        <tbody id="transactionProductList">
+
                         </tbody>
                     </table>
                 </div>
@@ -154,7 +155,7 @@
                 $('#inputName').val(value);
                 $('#listName').html("");
 
-                console.log('data', this.dataset.value)
+                // console.log('data', this.dataset.value)
                 let data = JSON.parse(this.dataset.value)
 
                 currItem = {}
@@ -163,20 +164,58 @@
                 $('#productCode').text(data.id)
                 $('#productCode').removeClass('text-danger text-muted')
                 $('#productCode').addClass("text-success")
-                // $('#inputBuy').val(data.buy_price)
-                // $('#inputSell').val(data.sell_price)
-                // $('#inputMinStock').val(data.min_stock)
+
                 $('#canAdd').val('true')
             });
         })
         
         function addProduct() {
-            if ($('#canAdd').val() === 'true'){
+            if ($('#canAdd').val() === 'false'){
                 $('#errorModalBody').text('Invalid data, please reselect the product')
                 $('#modal').modal('show')
             }
+            else if($('#inputQuantity').val() < 0 || $('#inputQuantity').val() < 0){
+                $('#errorModalBody').text('Please fill the quantity')
+                $('#modal').modal('show')
+            }
+            else if ($('#inputQuantity').val() > currItem.stock) {
+                $('#errorModalBody').text('The maximum quantity is ' + currItem.stock)
+                $('#modal').modal('show')
+            }
+            else {
+                allTransactionProduct.push({
+                    'data': currItem,
+                    'quantity': $('#inputQuantity').val()
+                })
+                console.log('data', currItem)
+                $('#transactionProductList').append("\
+                <tr id='row"+currItem.id+"'>\
+                    <td>"+currItem.name+"</td>\
+                    <td>"+$('#inputQuantity').val()+"</td>\
+                    <td>Rp. "+currItem.sell_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+"</td>\
+                    <td> Rp. "+(currItem.sell_price * $('#inputQuantity').val()).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+"</td>\
+                    <td>\
+                        <button type=\"button\" class=\"btn btn-gradient-danger btn-rounded btn-icon\" onclick=\"removeFromTable('"+currItem.id+"')\">\
+                            <i class=\"mdi mdi-close\"></i>\
+                        </button>\
+                    </td>\
+                </tr>\
+                ")
+
+                $('#canAdd').val('false')
+                $('#inputQuantity').val(0)
+                $('#inputName').val('')
+            }
         }
-        
+
+        function removeFromTable(id) {
+            allTransactionProduct.filter(function (item) {
+                return item.data.id === id
+            })
+
+            $('#row'+id).remove()
+        }
+
     </script>
 
 @endsection

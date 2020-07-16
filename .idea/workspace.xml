@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="817ccd6c-0950-4110-81be-5f73dead2193" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/transaction/cashier/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/transaction/cashier/index.blade.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/askedio/laravel-soft-cascade/" />
@@ -130,12 +130,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/transaction/cashier/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="156" column="55" lean-forward="true" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
+            <state relative-caret-position="182">
+              <caret line="191" column="43" selection-start-line="191" selection-start-column="43" selection-end-line="191" selection-end-column="43" />
               <folding>
-                <element signature="e#1833#2210#0#HTML" />
-                <element signature="e#2342#2570#0#HTML" />
-                <element signature="e#3096#4438#0#HTML" />
+                <element signature="e#4319#4696#0#HTML" />
+                <element signature="e#4791#5019#0#HTML" />
+                <element signature="e#5075#6372#0#HTML" />
               </folding>
             </state>
           </provider>
@@ -144,11 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/purchase/insert.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="268" column="16" lean-forward="true" selection-start-line="268" selection-start-column="16" selection-end-line="269" selection-end-column="41" />
-              <folding>
-                <element signature="e#5785#9413#0#HTML" />
-              </folding>
+            <state relative-caret-position="243">
+              <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="327" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -156,7 +153,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="896">
+            <state relative-caret-position="2006">
               <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
@@ -172,6 +169,7 @@
       <find>w-</find>
       <find>w-25</find>
       <find>cursor</find>
+      <find>data</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -315,8 +313,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-38" />
-    <option name="y" value="236" />
+    <option name="x" value="-39" />
+    <option name="y" value="235" />
     <option name="width" value="1940" />
     <option name="height" value="710" />
   </component>
@@ -325,6 +323,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -403,7 +402,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,16 +439,18 @@
       <updated>1594818577747</updated>
       <workItem from="1594818583307" duration="1319000" />
       <workItem from="1594874864409" duration="1399000" />
+      <workItem from="1594926932202" duration="4366000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74922000" />
+    <option name="totallyTimeSpent" value="79288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21409395" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21677852" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -675,13 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionHeaderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/transaction/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -696,13 +689,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2020_07_12_135020_create_salespersons_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2020_07_12_135020_create_salespersons_table.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2020_07_12_140606_create_transaction_headers_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -724,9 +711,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TransactionHeaderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="896">
+        <state relative-caret-position="2006">
           <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
@@ -736,22 +730,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/purchase/insert.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="268" column="16" lean-forward="true" selection-start-line="268" selection-start-column="16" selection-end-line="269" selection-end-column="41" />
-          <folding>
-            <element signature="e#5785#9413#0#HTML" />
-          </folding>
+        <state relative-caret-position="243">
+          <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="327" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/transaction/cashier/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="156" column="55" lean-forward="true" selection-start-line="156" selection-start-column="55" selection-end-line="156" selection-end-column="55" />
+        <state relative-caret-position="182">
+          <caret line="191" column="43" selection-start-line="191" selection-start-column="43" selection-end-line="191" selection-end-column="43" />
           <folding>
-            <element signature="e#1833#2210#0#HTML" />
-            <element signature="e#2342#2570#0#HTML" />
-            <element signature="e#3096#4438#0#HTML" />
+            <element signature="e#4319#4696#0#HTML" />
+            <element signature="e#4791#5019#0#HTML" />
+            <element signature="e#5075#6372#0#HTML" />
           </folding>
         </state>
       </provider>
