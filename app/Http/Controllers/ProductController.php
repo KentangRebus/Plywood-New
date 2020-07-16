@@ -45,11 +45,11 @@ class ProductController extends Controller
     {
 //        dd($request);
         $name = [
-            'code' => $request->code,
             'name' => $request->name,
+            'code' => $request->code,
+            'color' => $request->color,
             'type' => $request->type,
             'unit' => $request->unit,
-            'color' => $request->color,
         ];
 //        dd($name);
 
@@ -112,11 +112,11 @@ class ProductController extends Controller
         $product = Product::where('id', '=', $id)->first();
 
         $name = [
-            'code' => $request->code,
             'name' => $request->name,
+            'code' => $request->code,
+            'color' => $request->color,
             'type' => $request->type,
             'unit' => $request->unit,
-            'color' => $request->color,
         ];
         $product->name = json_encode($name);
         $product->buy_price = $request->buyPrice;
