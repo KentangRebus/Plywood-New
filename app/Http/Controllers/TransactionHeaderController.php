@@ -15,7 +15,6 @@ class TransactionHeaderController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
         if (Auth::user()->role == "admin")
             return view('transaction.index');
 
