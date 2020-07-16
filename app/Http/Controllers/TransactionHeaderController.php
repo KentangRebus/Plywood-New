@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TransactionHeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionHeaderController extends Controller
 {
@@ -14,7 +15,11 @@ class TransactionHeaderController extends Controller
      */
     public function index()
     {
-        return view('transaction.index');
+        dd(Auth::user());
+        if (Auth::user()->role == "admin")
+            return view('transaction.index');
+
+        return view('transaction.cashier.index');
     }
 
     /**

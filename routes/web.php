@@ -36,3 +36,7 @@ Route::post('/purchase/add', 'PurchaseHeaderController@store')->name('purchase-i
 Route::post('/purchase/paid/{id}', 'PurchaseHeaderController@paid')->name('purchase-paid');
 Route::post('/purchase/delete', 'PurchaseHeaderController@destroy')->name('purchase-delete');
 
+
+//transaction route
+Route::get('/transaction', 'TransactionHeaderController@index')->name('transaction-view');
+
