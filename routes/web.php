@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login', function () { return view('login.index');})->name('login');
+Route::post('/login', 'LoginController@doLogin' )->name('do-login');
+
+
 Route::get('/', function () { return view('dashboard.index');})->name('home');
 
 
