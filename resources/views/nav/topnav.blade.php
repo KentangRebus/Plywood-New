@@ -14,9 +14,16 @@
                     <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                 </a>
             </li>
+            <li class="nav-item d-none d-lg-block full-screen-link">
+                <a class="nav-link" href="{{route('logout')}}">
+                    <i class="mdi mdi-logout" id="fullscreen-button"></i>
+                    Sign Out
+                </a>
+            </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
         </button>
+
     </div>
 </nav>
