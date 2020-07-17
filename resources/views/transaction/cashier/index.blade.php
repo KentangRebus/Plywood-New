@@ -9,11 +9,36 @@
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
                       <i class="mdi mdi-barcode-scan"></i>
-                    </span> Cashier </h3>
+                    </span> Transaction </h3>
     </div>
     <div class="card">
         <div class="card-body">
-            <form action="" method="post">
+            <div>
+                @if (session()->has('msg'))
+                    <div class="modal fade" id="printModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{ session()->get('msg') }}
+                                </div>
+                                <div class="modal-body" id="errorModalBody">
+                                    Print Faktur Transaction?
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="{{route('transaction-print', ['id'=>session()->get('print_id')])}}" target="_blank" onclick="console.log('print')">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Print</button>
+                                    </a>
+                                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script !src="">
+
+                    </script>
+                @endif
+            </div>
+            <form action="{{route('transaction-insert')}}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -28,14 +53,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputDueDate">Due Date</label>
-                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Due Date">
+                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Due Date" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="inputStock">Need to Pay</label>
-                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Need to Pay" >
+                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Need to Pay" required>
                 </div>
                 <hr>
 
@@ -53,7 +78,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputQuantity">Quantity</label>
-                            <input name="quantity" min="1" max="10" type="number" class="form-control" id="inputQuantity" placeholder="Quantity" required>
+                            <input name="quantity" min="1" max="10" type="number" class="form-control" id="inputQuantity" placeholder="Quantity">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -77,6 +102,13 @@
 
                         </tbody>
                     </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="hidden" id="productList" name="productList" value="">
+                        <button type="submit" class="btn btn-block btn-gradient-primary mr-2" onclick="addFormData()">Submit</button>
+                    </div>
                 </div>
 
             </form>
@@ -150,6 +182,9 @@
                 })
             })
 
+            if ($('#printModal') !== undefined || $('#printModal') !== null )
+                $('#printModal').modal('show')
+
             $(document).on('click', 'li', function(){
                 var value = $(this).text();
                 $('#inputName').val(value);
@@ -203,7 +238,7 @@
                 ")
 
                 $('#canAdd').val('false')
-                $('#inputQuantity').val(0)
+                $('#inputQuantity').val('')
                 $('#inputName').val('')
             }
         }
@@ -216,6 +251,9 @@
             $('#row'+id).remove()
         }
 
+        function addFormData() {
+            $('#productList').val(JSON.stringify(allTransactionProduct))
+        }
     </script>
 
 @endsection

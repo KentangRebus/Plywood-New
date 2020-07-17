@@ -12,4 +12,8 @@ class TransactionDetail extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function productDetail () {
+        return $this->hasOne('App\Product', 'id', 'product_id');
+    }
 }

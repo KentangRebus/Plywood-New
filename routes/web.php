@@ -43,4 +43,7 @@ Route::post('/purchase/delete', 'PurchaseHeaderController@destroy')->name('purch
 
 //transaction route
 Route::get('/transaction', 'TransactionHeaderController@index')->name('transaction-view');
+Route::get('/transaction/print/{id}', 'TransactionHeaderController@print')->name('transaction-print');
+
+Route::post('/transaction/add', 'TransactionHeaderController@store')->name('transaction-insert');
 
