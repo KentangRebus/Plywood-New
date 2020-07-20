@@ -28,3 +28,5 @@ Homestead.json
 *.xml
 *.xml
 *.xml
+.idea/workspace.xml
+*.xml

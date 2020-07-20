@@ -9,10 +9,7 @@ class LoginController extends Controller
 {
     public function doLogin(Request $request) {
         $credential = $request->only('username', 'password');
-//        dd($credential);
-        if (Auth::attempt($credential)) {
-            return view('dashboard.index');
-        }
-        return view('login.index');
+        if (Auth::attempt($credential)) return redirect()->route('home');
+        return redirect()->route('do-login');
     }
 }

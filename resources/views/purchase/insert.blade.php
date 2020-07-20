@@ -24,7 +24,6 @@
                                 <option value="Hutang">Hutang</option>
                             </select>
                         </div>
-
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">

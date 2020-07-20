@@ -17,7 +17,7 @@
                     <img src="{{asset('images/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Today Income<i class="mdi mdi-currency-usd mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">Rp. 15,0000</h2>
+                    <h2 class="mb-5">Rp. {{number_format($data['income'])}}</h2>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     <img src="{{asset('images/circle.svg')}}" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Number of Transactions<i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
-                    <h2 class="mb-5">45,6334</h2>
+                    <h2 class="mb-5">{{number_format($data['transaction'])}}</h2>
                 </div>
             </div>
         </div>

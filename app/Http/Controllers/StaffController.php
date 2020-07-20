@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Staffs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StaffController extends Controller
 {
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+
     /**
      * Display a listing of the resource.
      *
