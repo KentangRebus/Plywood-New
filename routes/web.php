@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function (){
 
 //transaction route
     Route::get('/transaction', 'TransactionHeaderController@index')->name('transaction-view');
+    Route::get('/transaction/{id}', 'TransactionHeaderController@show')->name('transaction-detail');
     Route::get('/transaction/print/{id}', 'TransactionHeaderController@print')->name('transaction-print');
 
     Route::post('/transaction/add', 'TransactionHeaderController@store')->name('transaction-insert');

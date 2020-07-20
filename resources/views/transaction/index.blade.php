@@ -45,7 +45,7 @@
                             @endif
                                 <td class="row">
                                     <div class="mx-2">
-                                        <a href="">
+                                        <a href="{{route('transaction-detail',['id'=>$d->id])}}">
                                             <button type="submit" class="btn btn-gradient-dark btn-rounded btn-icon">
                                                 <i class="mdi mdi-information-variant"></i>
                                             </button>

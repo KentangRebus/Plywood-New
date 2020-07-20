@@ -86,9 +86,17 @@ class TransactionHeaderController extends Controller
      * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function show(TransactionHeader $transactionHeader)
+    public function show($id)
     {
-        //
+        $data = TransactionHeader::where('id', '=', $id)->first();
+//        dd($data);
+        $total = 0;
+
+        foreach ($data->details as $d) {
+            $total += $d->quantity * $d->price;
+        }
+
+        return view('transaction.detail')->with(['data'=>$data, 'total'=>$total]);
     }
 
     /**
