@@ -18,10 +18,13 @@ class TransactionHeaderController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role == "admin")
-            return view('transaction.index');
+        if (Auth::user()->role == "staff")
+            return view('transaction.cashier.index');
 
-        return view('transaction.cashier.index');
+
+        $data = TransactionHeader::orderBy('is_done', 'asc')->orderBy('created_at', 'asc')->orderBy('due_date', 'asc')->paginate(10);
+        return view('transaction.index')->with(['data'=>$data]);
+
     }
 
     /**

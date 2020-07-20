@@ -18,16 +18,50 @@
                     <thead>
                     <tr>
                         <th>Time</th>
-                        <th class="w-25">Code</th>
-                        <th>Status</th>
+                        <th class="w-30">Code</th>
+{{--                        <th>Status</th>--}}
                         <th>Need</th>
                         <th>Due Date</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($data as $d)
+                        @if($d->is_done == 0 && Carbon\Carbon::now()->add(3, 'day')->gte($d->due_date))
+                            <tr class="table-danger cursor-pointer">
+                        @else
+                            <tr class="cursor-pointer">
+                        @endif
+                            <td class="text-truncate" title="{{$d->created_at}}">{{$d->created_at}}</td>
+                            <td class="text-truncate" title="{{$d->id}}">{{$d->id}}</td>
+                            @if($d->is_done == 0) {{-- status payment hutang--}}
+{{--                                <td>Hutang</td>--}}
+                                <td class="text-truncate text-danger" title="Rp. {{number_format($d->needs)}}">Rp. {{number_format($d->needs)}}</td>
+                                <td class="text-truncate" title="{{$d->due_date}}">{{$d->due_date}}</td>
+                                @else
+{{--                                <td>Lunas</td>--}}
+                                <td> - </td>
+                                <td> - </td>
+                            @endif
+                                <td class="row">
+                                    <div class="mx-2">
+                                        <a href="">
+                                            <button type="submit" class="btn btn-gradient-dark btn-rounded btn-icon">
+                                                <i class="mdi mdi-information-variant"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal" onclick="deletePurchaseData('{{$d->id}}')">
+                                        <i class="mdi mdi-close"></i>
+                                    </button>
+                                </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
+                <div>
+                    {{$data->links()}}
+                </div>
             </div>
         </div>
     </div>
