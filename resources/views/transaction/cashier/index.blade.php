@@ -25,17 +25,17 @@
                                     Print Faktur Transaction?
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="{{route('transaction-print', ['id'=>session()->get('print_id')])}}" target="_blank" onclick="console.log('print')">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Print</button>
-                                    </a>
+                                    <form action="{{route('transaction-print', ['id'=>session()->get('print_id')])}}" method="get">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Print</button>
+                                    </form>
+{{--                                    <a href="{{route('transaction-print', ['id'=>session()->get('print_id')])}}" onclick="openModal()">--}}
+{{--                                    </a>--}}
                                     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <script !src="">
-
-                    </script>
                 @endif
             </div>
             <form action="{{route('transaction-insert')}}" method="post">
@@ -247,12 +247,15 @@
             allTransactionProduct.filter(function (item) {
                 return item.data.id === id
             })
-
             $('#row'+id).remove()
         }
 
         function addFormData() {
             $('#productList').val(JSON.stringify(allTransactionProduct))
+        }
+        
+        function openModal() {
+            $('#printModal').modal('show');
         }
     </script>
 

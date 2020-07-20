@@ -18,7 +18,7 @@ Route::post('/login', 'LoginController@doLogin' )->name('do-login');
 
 
 Route::group(['middleware' => ['auth']], function (){
-    Route::get('/', function () { return view('dashboard.index');})->name('home');
+    Route::get('/', 'DashboardController@index')->name('home');
 
 //purchase routes
     Route::get('/product', 'ProductController@index')->name('product-view');
@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('/transaction/print/{id}', 'TransactionHeaderController@print')->name('transaction-print');
 
     Route::post('/transaction/add', 'TransactionHeaderController@store')->name('transaction-insert');
+    Route::post('/transaction/delete', 'TransactionHeaderController@destroy')->name('transaction-delete');
 
 //    log out user
     Route::get('/logout', 'StaffController@logout')->name('logout');

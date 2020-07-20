@@ -66,5 +66,30 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Delete this transaction?</h4>
+                </div>
+                <form id="deleteForm" action="{{route('transaction-delete')}}" method="post">
+                    @csrf
+                    <input id="inputId" type="hidden" name="id" value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script !src="">
+        function deletePurchaseData(id) {
+            $('#inputId').val('');
+            $('#inputId').val(id);
+        }
+    </script>
+
 @endsection
 

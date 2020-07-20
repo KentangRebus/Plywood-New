@@ -128,9 +128,19 @@ class TransactionHeaderController extends Controller
      * @param  \App\TransactionHeader  $transactionHeader
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TransactionHeader $transactionHeader)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+//        dd($id);
+        $transaction = TransactionHeader::where('id', '=', $id)->first();
+        foreach ($transaction->details as $d) {
+            $p = Product::where('id', '=', $d->product_id)->first();
+            $p->stock += $d->quantity;
+            $p->save();
+        }
+
+        $transaction->delete();
+        return redirect()->route('transaction-view')->with(['msg' => "Transaction has been deleted"]);
     }
 
     public function print($id) {
