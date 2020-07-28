@@ -39,19 +39,20 @@
 </head>
 <body class="p-3">
 <div>
-    <h1>PT. Sinar Karurnia Adidjaya</h1>
+    <h1>PT Sinar Karunia Adi Jaya</h1>
     <div class="mt-2">Jl. Caman Raya no. 60, RT. 07 /  RW. 01, Jati Bening <br> Pondok Gede, Bekasi Kota, Jawa Barat, Indonesia</div>
     <div class="mt-3">Telp: (021) 2284 5271 / 2284 5278</div>
 </div>
 <hr>
 <div class="mt-3">
     <div class="row" style="margin-bottom: 1.5rem;">
-            <div class="my-2">Transaction code: {{$data->id}}</div>
-            <div class="my-2">Transaction date: {{$data->created_at}}</div>
-            <div class="my-2">Payment Status: {{$data->is_done == 1 ? "Lunas" : "Hutang"}}</div>
+            <div class="my-2">Kode Transaksi: {{$data->id}}</div>
+            <div class="my-2">Kode Faktur: {{$data->id}}</div>
+            <div class="my-2">Tanggal Transaksi: {{$data->created_at}}</div>
+            <div class="my-2">Status Pembayaran: {{$data->is_done == 1 ? "Lunas" : "Hutang"}}</div>
         @if($data->is_done == 0)
-            <div class="my-2">Due Date: {{$data->due_date}}</div>
-            <div class="my-2">Need: Rp. {{number_format($data->needs)}}</div>
+            <div class="my-2">Jatuh Tempo: {{$data->due_date}}</div>
+            <div class="my-2">Kekurangan: Rp. {{number_format($data->needs)}}</div>
         @endif
     </div>
     <table class="table" style="table-layout: fixed; width: 100%;">

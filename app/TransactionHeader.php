@@ -19,4 +19,9 @@ class TransactionHeader extends Model
     public function details() {
         return $this->hasMany('App\TransactionDetail', 'id', 'id');
     }
+
+    public function customer() {
+        return $this->hasOne('App\Customer', 'id', 'customer_id');
+    }
+
 }
