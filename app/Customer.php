@@ -13,4 +13,9 @@ class Customer extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function transactions() {
+        return $this->hasMany('App\TransactionHeader', 'customer_id', 'id');
+    }
+
 }

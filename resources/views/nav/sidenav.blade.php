@@ -27,6 +27,18 @@
                     <i class="mdi mdi-archive menu-icon"></i>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('purchase-view')}}">
+                    <span class="menu-title">Member</span>
+                    <i class="mdi mdi-archive menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('purchase-view')}}">
+                    <span class="menu-title">Category</span>
+                    <i class="mdi mdi-archive menu-icon"></i>
+                </a>
+            </li>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role == "staff")
             <li class="nav-item">
                 <a class="nav-link" href="{{route('home')}}">

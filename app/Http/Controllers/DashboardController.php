@@ -10,6 +10,8 @@ class DashboardController extends Controller
 {
     public function index() {
         $transaction = TransactionHeader::whereDate('created_at', Carbon::now())->get();
+        \Data::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+
         $income = 0;
 
         foreach ($transaction as $t) {
@@ -21,6 +23,9 @@ class DashboardController extends Controller
         $data = [
             "income"=>$income,
             "transaction"=>count($transaction),
+            "daily_profit"=>0,
+            "weekly_profit"=>0,
+            "monthly_profit"=>0,
         ];
 
         return view('dashboard.index')->with(['data'=>$data]);

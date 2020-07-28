@@ -13,4 +13,9 @@ class Category extends Model
 
     protected $keyType = 'string';
     public $incrementing = false;
+
+    public function products(){
+        return $this->hasMany('App\Product', 'category_id', 'id');
+    }
+
 }
