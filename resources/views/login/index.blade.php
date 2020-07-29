@@ -13,6 +13,9 @@
     <title>Login</title>
 </head>
 <body>
+{{--{{\Illuminate\Support\Facades\Hash::make('admin')}}--}}
+{{--<br>--}}
+{{--{{\Illuminate\Support\Facades\Hash::make('staff')}}--}}
 <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">

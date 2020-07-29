@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('address')->nullable();
             $table->string('nik')->nullable();
             $table->string('npwp')->nullable();
+            $table->integer('debt')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

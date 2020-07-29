@@ -14,7 +14,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $data = Customer::orderBy('debt', 'desc')->paginate(10);
+
+        return view('customer.index')->with(['data'=>$data]);
     }
 
     /**
@@ -24,7 +26,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.insert');
     }
 
     /**
@@ -35,7 +37,15 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        $customer = new Customer();
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->nik = $request->nik;
+        $customer->npwp = $request->npwp;
+        $customer->save();
+
+        return redirect()->route('customer-view')->with(['msg'=>'Customer berhasil ditambahkan']);
     }
 
     /**
@@ -44,9 +54,11 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($id)
     {
-        //
+        $data = Customer::where('id', '=' ,$id)->first();
+
+        return view('customer.detail')->with(['data'=>$data]);
     }
 
     /**
@@ -55,9 +67,11 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        $data = Customer::where('id', '=' ,$id)->first();
+
+        return view('customer.update')->with(['data'=>$data]);
     }
 
     /**
@@ -67,9 +81,16 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::where('id', '=' ,$id)->first();
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->nik = $request->nik;
+        $customer->npwp = $request->npwp;
+        $customer->save();
+
+        return redirect()->route('customer-view')->with(['msg'=>'Customer berhasil diperbaharui']);
     }
 
     /**

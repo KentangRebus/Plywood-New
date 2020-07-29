@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        return view('category.index')->with(['data'=>$data]);
     }
 
     /**

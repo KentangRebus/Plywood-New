@@ -50,6 +50,19 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/transaction/add', 'TransactionHeaderController@store')->name('transaction-insert');
     Route::post('/transaction/delete', 'TransactionHeaderController@destroy')->name('transaction-delete');
 
+//    category route
+    Route::get('/category', 'CategoryController@index')->name('category-view');
+
+//    customer route
+    Route::get('/customer', 'CustomerController@index')->name('customer-view');
+    Route::get('/customer/add', 'CustomerController@create')->name('customer-insert-view');
+    Route::get('/customer/{id}', 'CustomerController@show')->name('customer-detail-view');
+    Route::get('/customer/update/{id}', 'CustomerController@edit')->name('customer-update-view');
+
+    Route::post('/customer/add', 'CustomerController@store')->name('customer-insert');
+    Route::post('/customer/update/{id}', 'CustomerController@update')->name('customer-update');
+    Route::post('/customer/delete/{id}', 'CustomerController@destroy')->name('customer-delete');
+
 //    log out user
     Route::get('/logout', 'StaffController@logout')->name('logout');
 });
