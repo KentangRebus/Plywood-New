@@ -1,7 +1,7 @@
 
 @extends('layout.default_layout')
 
-@section('title', 'Product')
+@section('title', 'Customer')
 
 @section('content')
 
@@ -17,6 +17,13 @@
                 @if (session()->has('msg'))
                     <div class="alert alert-success">
                         {{ session()->get('msg') }}
+                    </div>
+                @endif
+            </div>
+            <div>
+                @if (session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
                     </div>
                 @endif
             </div>
@@ -53,11 +60,12 @@
                                     </button>
                                 </a>
                             </div>
-                            <div>
-                                <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal">
+                            <form action="{{route('customer-delete', ['id'=>$d->id])}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" data-toggle="modal" data-target="#modal">
                                     <i class="mdi mdi-close"></i>
                                 </button>
-                            </div>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

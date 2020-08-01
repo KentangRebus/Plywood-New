@@ -99,8 +99,14 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        $customer = Customer::where('id', '=', $id)->first();
+        if (count($customer->transactions) == 0){
+            $customer->delete();
+            return redirect()->route('customer-view')->with(['msg'=>'Customer berhasil didelete']);
+        }
+
+        return redirect()->route('customer-view')->with(['error'=>'Customer tidak bisa didelete karena memiliki transaksi']);
     }
 }

@@ -9,7 +9,7 @@
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
                       <i class="mdi mdi-cube"></i>
-                    </span> Manage Products </h3>
+                    </span> Pengaturan Produk </h3>
     </div>
     <div class="card">
         <div class="card-body">
@@ -20,15 +20,25 @@
                     </div>
                 @endif
             </div>
-            <div class="d-flex justify-content-between mb-3">
-                <a href="{{route('product-insert-view')}}"><button class="btn btn-gradient-success">+ Add Products</button></a>
-                <form action="{{route('product-search')}}" method="post">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <a href="{{route('product-insert-view')}}"><button class="btn btn-gradient-success">+ Tambah Produk</button></a>
+                </div>
+                <form action="{{route('product-search')}}" method="post" class="row col-md-6">
+                    <div class="input-group col-md-5">
+                        <select name="searchCategory" id="" class="w-100 form-control">
+                            <option value="">Semua</option>
+                            @foreach($categories as $c)
+                                <option value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     @csrf
-                    <div class="input-group">
+                    <div class="input-group col-md-7">
                         @if(!empty($query))
-                            <input name="query" type="text" class="form-control" placeholder="Product Name" aria-label="Product Name" aria-describedby="basic-addon2" value="{{$query}}">
+                            <input name="query" type="text" class="form-control" placeholder="Nama Produk" aria-label="Product Name" aria-describedby="basic-addon2" value="{{$query}}">
                         @else
-                            <input name="query" type="text" class="form-control" placeholder="Product Name" aria-label="Product Name" aria-describedby="basic-addon2">
+                            <input name="query" type="text" class="form-control" placeholder="Nama Produk" aria-label="Product Name" aria-describedby="basic-addon2">
                         @endif
                         <div class="input-group-append">
                             <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
@@ -40,10 +50,11 @@
             <table class="table table-hover" style="table-layout: fixed;">
                 <thead>
                 <tr>
-                    <th class="w-40">Name</th>
-                    <th>Stock</th>
-                    <th>Buy Price</th>
-                    <th>Sell Price</th>
+                    <th class="w-35">Nama</th>
+                    <th>Kategori</th>
+                    <th>Persediaan</th>
+                    <th>Harga Modal</th>
+                    <th>Harga Jual</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -55,6 +66,7 @@
                         <tr>
                     @endif
                         <td class="text-truncate" title="{{$d->name}}">{{$d->name}}</td>
+                        <td>{{$d->category->name}}</td>
                         <td >{{$d->stock}}</td>
                         <td>Rp. {{number_format($d->buy_price,0)}}</td>
                         <td>Rp. {{number_format($d->sell_price,0)}}</td>

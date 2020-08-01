@@ -17,16 +17,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputCode">Code</label>
-                            <input name="code" type="text" class="form-control" id="inputCode" placeholder="Code">
+                            <label for="inputCode">Kode</label>
+                            <input name="code" type="text" class="form-control" id="inputCode" placeholder="Kode">
                         </div>
                         <div class="form-group">
-                            <label for="inputName">Name</label>
-                            <input name="name" type="text" class="form-control" id="inputName" placeholder="Name" required>
+                            <label for="inputName">Nama</label>
+                            <input name="name" type="text" class="form-control" id="inputName" placeholder="Nama" required>
                         </div>
                         <div class="form-group">
-                            <label for="inputType">Type</label>
-                            <input name="type" type="text" class="form-control" id="inputType" placeholder="Type">
+                            <label for="inputType">Tipe</label>
+                            <input name="type" type="text" class="form-control" id="inputType" placeholder="Tipe">
                         </div>
 
                     </div>
@@ -36,30 +36,43 @@
                             <input name="unit" type="text" class="form-control" id="inputUnit" placeholder="Unit">
                         </div>
                         <div class="form-group">
-                            <label for="inputColor">Color</label>
-                            <input name="color" type="text" class="form-control" id="inputColor" placeholder="Color">
+                            <label for="inputBrand">Merek</label>
+                            <input name="brand" type="text" class="form-control" id="inputBrand" placeholder="Merel">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Deskripsi</label>
+                            <input name="description" type="text" class="form-control" id="inputDescription" placeholder="Deskripsi">
                         </div>
 
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputStock">Stock</label>
-                    <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Number of Stocks" required>
+                    <label for="inputCategory">Kategori</label>
+                    <select class="form-control" id="inputCategory" name="category">
+                        @foreach($categories as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputMinStock">Minimum Stock</label>
-                    <input name="minStock" min="1" type="number" class="form-control" id="inputMinStock" placeholder="Minimum Stock" required>
+                    <label for="inputStock">Persediaan</label>
+                    <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Jumlah Persediaan" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputBuy">Buy Price</label>
+                    <label for="inputMinStock">Persediaan Minimum</label>
+                    <input name="minStock" min="1" type="number" class="form-control" id="inputMinStock" placeholder="Persediaan Minimum" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputBuy">Harga Modal</label>
                     <input name="buyPrice" min="0" type="number" class="form-control" id="inputBuy" placeholder="Rp." required>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputSell">Sell Price</label>
+                    <label for="inputSell">Harga Jual</label>
                     <input name="sellPrice" min="0" type="number" class="form-control" id="inputSell" placeholder="Rp." required>
                 </div>
 

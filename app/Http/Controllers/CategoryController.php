@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = [];
+        $data = Category::paginate(10);
         return view('category.index')->with(['data'=>$data]);
     }
 
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.insert');
     }
 
     /**
@@ -36,7 +36,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('category-view')->with(['msg'=>'Kategori berhasil ditambahkan']);
     }
 
     /**
@@ -56,9 +60,10 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::where('id', '=', $id)->first();
+        return view('category.update')->with(['data'=>$category]);
     }
 
     /**
@@ -68,9 +73,13 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::where('id', '=', $id)->first();
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('category-view')->with(['msg'=>'Kategori berhasil diperbaharui']);
     }
 
     /**
@@ -79,8 +88,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::where('id', '=', $id)->first();
+
+        if (count($category->products) == 0){
+            $category->delete();
+            return redirect()->route('category-view')->with(['msg'=>'Kategori berhasil dihapus']);
+        }
+        return redirect()->route('category-view')->with(['msg'=>'Kategori tidak bisa dihapus karena sedang digunakan']);
     }
 }

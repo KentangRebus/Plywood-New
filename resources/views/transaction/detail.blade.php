@@ -71,11 +71,12 @@
                     @foreach($data->details as $d)
                         <tr>
                             <td class="text-truncate">
-                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->code}}
-                                {{json_decode($d->productDetail->name)->color}}
+                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->type}}
+                                {{json_decode($d->productDetail->name)->brand}}
                                 {{json_decode($d->productDetail->name)->unit}}
+                                {{json_decode($d->productDetail->name)->description}}
                             </td>
                             <td>
                                 {{$d->quantity}}
@@ -97,6 +98,15 @@
                             Total: Rp. {{number_format($total, 0)}}
                         </h4>
                     </div>
+                </div>
+                <div>
+                    @if($data->is_done == 0)
+                        <a href="">
+                            <button class="btn btn-block btn-success">
+                                Paid
+                            </button>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -52,6 +52,12 @@ Route::group(['middleware' => ['auth']], function (){
 
 //    category route
     Route::get('/category', 'CategoryController@index')->name('category-view');
+    Route::get('/category/add', 'CategoryController@create')->name('category-insert-view');
+    Route::get('/category/update/{id}', 'CategoryController@edit')->name('category-update-view');
+
+    Route::post('/category/add', 'CategoryController@store')->name('category-insert');
+    Route::post('/category/delete/{id}', 'CategoryController@destroy')->name('category-delete');
+    Route::post('/category/update/{id}', 'CategoryController@update')->name('category-update');
 
 //    customer route
     Route::get('/customer', 'CustomerController@index')->name('customer-view');

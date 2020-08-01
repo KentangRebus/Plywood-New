@@ -1,7 +1,7 @@
 
 @extends('layout.default_layout')
 
-@section('title', 'Product')
+@section('title', 'Customer')
 
 @section('content')
 
