@@ -22,15 +22,32 @@
             </div>
             <div>
                 <div class="form-group">
-                    <h4>Transaction Code:</h4>
+                    <h5 class="font-weight-bold">Kode Transaksi:</h5>
                     <div>
                         {{$data->id}}
                     </div>
                 </div>
+                <div class="form-group">
+                    <h5 class="font-weight-bold">Nomor Faktur:</h5>
+                    <div>
+                        {{$data->invoice_number}}
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <h5 class="font-weight-bold">Nama Customer:</h5>
+                        {{$data->customer->name}}
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="font-weight-bold">Nomor telepon:</h5>
+                        {{$data->customer->phone ?? '-'}}
+                    </div>
+
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <h4>Due Date:</h4>
+                            <h5 class="font-weight-bold">Jatuh Tempo:</h5>
                             <div>
                                 @if($data->is_done == 0)
                                     {{$data->due_date}}
@@ -42,7 +59,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <h4>Need to Pay:</h4>
+                            <h5 class="font-weight-bold">Kekurangan:</h5>
                             <div>
                                 @if($data->is_done == 0)
                                     Rp. {{number_format($data->needs,0)}}
@@ -61,9 +78,9 @@
                 <table class="table table-hover" style="table-layout: fixed;">
                     <thead>
                     <tr>
-                        <th class="w-50">Name</th>
-                        <th>Quantity</th>
-                        <th>Sell Price</th>
+                        <th class="w-50">Nama Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
                         <th>Subtotal</th>
                     </tr>
                     </thead>
@@ -71,11 +88,12 @@
                     @foreach($data->details as $d)
                         <tr>
                             <td class="text-truncate">
-                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->code}}
-                                {{json_decode($d->productDetail->name)->color}}
+                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->type}}
+                                {{json_decode($d->productDetail->name)->brand}}
                                 {{json_decode($d->productDetail->name)->unit}}
+                                {{json_decode($d->productDetail->name)->description}}
                             </td>
                             <td>
                                 {{$d->quantity}}
@@ -97,6 +115,14 @@
                             Total: Rp. {{number_format($total, 0)}}
                         </h4>
                     </div>
+                </div>
+                <div>
+                    @if($data->is_done == 0)
+                        <form action="{{route('transaction-paid', ['id'=>$data->id])}}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-block btn-gradient-success">Paid</button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

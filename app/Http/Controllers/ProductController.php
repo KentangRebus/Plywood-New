@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
+use PDF;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,14 +17,14 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::orderBy('stock', 'asc')->paginate(10);
-
         foreach ($data as $d) {
-//            dd($d->name);
             $formated_name = json_decode($d->name);
-            $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
+            $d->name = "$formated_name->code $formated_name->name $formated_name->type $formated_name->brand $formated_name->unit $formated_name->description";
         }
 
-        return view('product.index')->with(['data'=>$data]);
+        $category = Category::all();
+
+        return view('product.index')->with(['data'=>$data, 'categories' => $category]);
     }
 
     /**
@@ -32,7 +34,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.insert');
+        $categories = Category::all();
+        return view('product.insert')->with(['categories'=>$categories]);
     }
 
     /**
@@ -45,11 +48,12 @@ class ProductController extends Controller
     {
 //        dd($request);
         $name = [
-            'name' => $request->name,
             'code' => $request->code,
-            'color' => $request->color,
+            'name' => $request->name,
             'type' => $request->type,
+            'brand' => $request->brand,
             'unit' => $request->unit,
+            'description' => $request->description,
         ];
 //        dd($name);
 
@@ -59,6 +63,7 @@ class ProductController extends Controller
         $product->sell_price = $request->sellPrice;
         $product->stock = $request->stock;
         $product->min_stock = $request->minStock;
+        $product->category_id = $request->category;
         $product->save();
 
         return redirect()->route('product-view')->with(['msg' => "New product has been added"]);
@@ -67,24 +72,23 @@ class ProductController extends Controller
 
     public function show(Request $request)
     {
-//        dd($request['query']);
         $query = explode(' ', $request['query']);
         $formated_query = '';
+        $searchCategory = $request->searchCategory ?? '';
+//        dd($searchCategory);
 
         foreach ($query as $q) {
             $formated_query .= "%$q%";
         }
-        $data = Product::where('name', 'like', $formated_query)->orderBy('stock', 'asc')->paginate(10);
+        $data = Product::where('name', 'like', $formated_query)->where('category_id', 'like', "%$searchCategory%")->orderBy('stock', 'asc')->paginate(10);
         foreach ($data as $d) {
             $formated_name = json_decode($d->name);
-            $d->name = "$formated_name->name $formated_name->code $formated_name->color $formated_name->type $formated_name->unit";
+            $d->name = "$formated_name->code $formated_name->name $formated_name->type $formated_name->brand $formated_name->unit $formated_name->description";
         }
 
-        return view('product.index')->with(['data'=>$data, 'query' => $request['query']]);
-    }
-
-    public function filterQuery($value, $key, $query){
-        return !strpos($value, $query);
+        $categories = Category::all();
+        return view('product.index')->with(['data'=>$data, 'query' => $request['query'], 'categoryQuery'=>$searchCategory, 'categories'=>$categories]);
+//        return redirect()->route('product-view')->with(['data'=>$data, 'query' => $request['query']]);
     }
 
     /**
@@ -112,11 +116,12 @@ class ProductController extends Controller
         $product = Product::where('id', '=', $id)->first();
 
         $name = [
-            'name' => $request->name,
             'code' => $request->code,
-            'color' => $request->color,
+            'name' => $request->name,
             'type' => $request->type,
+            'brand' => $request->brand,
             'unit' => $request->unit,
+            'description' => $request->description,
         ];
         $product->name = json_encode($name);
         $product->buy_price = $request->buyPrice;
@@ -140,5 +145,19 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product-view')->with(['msg' => "Product has been deleted"]);
+    }
+
+    public function print(Request $request) {
+        $category = $request->category;
+        $category = Category::where('id', '=', $category)->first();
+
+        if ($category == '' || $category == null)
+            $data = Product::all();
+        else
+            $data = Product::where('category_id', 'like', "%$category->id%")->get();
+
+        $pdf = PDF::loadView('product.invoice', ['data'=>$data, 'category' => $category->name]);
+        return $pdf->download("Stock.pdf");
+
     }
 }
