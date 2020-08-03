@@ -73,6 +73,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/customer/add', 'CustomerController@store')->name('customer-insert');
     Route::post('/customer/update/{id}', 'CustomerController@update')->name('customer-update');
     Route::post('/customer/delete/{id}', 'CustomerController@destroy')->name('customer-delete');
+    Route::post('/customer/search', 'CustomerController@search')->name('customer-search');
 
 //    log out user
     Route::get('/logout', 'StaffController@logout')->name('logout');

@@ -110,4 +110,13 @@ class CustomerController extends Controller
 
         return redirect()->route('customer-view')->with(['error'=>'Customer tidak bisa didelete karena memiliki transaksi']);
     }
+
+    public function search(Request $request) {
+        $query = $request->name;
+//        dd($request);
+        $data = Customer::where('name', 'like', "%$query%")->paginate(10);
+
+        return view('customer.index')->with(['data'=>$data, 'query'=>$query]);
+    }
+
 }

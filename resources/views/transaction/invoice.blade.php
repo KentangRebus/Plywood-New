@@ -39,28 +39,30 @@
 </head>
 <body class="p-3">
 <div>
-    <h1>PT Sinar Karunia Adi Jaya</h1>
-    <div class="mt-2">Jl. Caman Raya no. 60, RT. 07 /  RW. 01, Jati Bening <br> Pondok Gede, Bekasi Kota, Jawa Barat, Indonesia</div>
-    <div class="mt-3">Telp: (021) 2284 5271 / 2284 5278</div>
+    <h2>PT Sinar Karunia Adi Jaya</h2>
+    <div class="" style="font-size: 10px">Jl. Caman Raya no. 60, RT. 07 /  RW. 01, Jati Bening <br> Pondok Gede, Bekasi Kota, Jawa Barat, Indonesia</div>
+    <div class="mt-1" style="font-size: 10px">Telp: (021) 2284 5271 / 2284 5278</div>
 </div>
 <hr>
-<div class="mt-3">
+<div class="mt-2">
     <div class="row" style="margin-bottom: 1.5rem;">
-            <div class="my-2">Kode Transaksi: {{$data->id}}</div>
-            <div class="my-2">Kode Faktur: {{$data->id}}</div>
-            <div class="my-2">Tanggal Transaksi: {{$data->created_at}}</div>
-            <div class="my-2">Status Pembayaran: {{$data->is_done == 1 ? "Lunas" : "Hutang"}}</div>
+            <div class="my-1" style="font-size: 11px">Kode Transaksi: {{$data->id}}</div>
+            <div class="my-1" style="font-size: 11px">Kode Faktur: {{$data->invoice_number}}</div>
+            <div class="my-1" style="font-size: 11px">Tanggal Transaksi: {{$data->created_at}}</div>
+            <div class="mt-2" style="font-size: 11px">Nama Customer: {{$data->customer->name}}</div>
+            <div class="my-1" style="font-size: 11px">Status Pembayaran: {{$data->is_done == 1 ? "Lunas" : "Hutang"}}</div>
         @if($data->is_done == 0)
-            <div class="my-2">Jatuh Tempo: {{$data->due_date}}</div>
-            <div class="my-2">Kekurangan: Rp. {{number_format($data->needs)}}</div>
+            <div class="my-1" style="font-size: 11px">Jatuh Tempo: {{$data->due_date}}</div>
+            <div class="my-1" style="font-size: 11px">Kekurangan: Rp. {{number_format($data->needs)}}</div>
         @endif
+
     </div>
     <table class="table" style="table-layout: fixed; width: 100%;">
         <thead>
             <tr>
-                <th class="w-40 font-weight-bold">Name</th>
-                <th class="font-weight-bold">Quantity</th>
-                <th class="font-weight-bold">Price</th>
+                <th class="w-40 font-weight-bold">Nama Produk</th>
+                <th class="font-weight-bold">Jumlah</th>
+                <th class="font-weight-bold">Harga</th>
                 <th class="font-weight-bold">Subtotal</th>
             </tr>
         </thead>
@@ -68,11 +70,12 @@
         @foreach($data->details as $d)
             <tr>
                 <td>
-                    {{json_decode($d->productDetail->name)->name}}
                     {{json_decode($d->productDetail->name)->code}}
-                    {{json_decode($d->productDetail->name)->color}}
+                    {{json_decode($d->productDetail->name)->name}}
                     {{json_decode($d->productDetail->name)->type}}
                     {{json_decode($d->productDetail->name)->unit}}
+                    {{json_decode($d->productDetail->name)->brand}}
+                    {{json_decode($d->productDetail->name)->description}}
                 </td>
                 <td>{{$d->quantity}} {{json_decode($d->productDetail->name)->unit}}</td>
                 <td>Rp. {{ number_format($d->price)}}</td>
@@ -81,8 +84,14 @@
         @endforeach
         </tbody>
     </table>
-    <div class="font-weight-bold" style="font-size: 18px; text-align: right; margin-top: 2rem; margin-right: 3rem;">
-            Grand Total: Rp. {{number_format($total)}}
+{{--    <div class="font-weight-bold" style="font-size: 18px; text-align: right; margin-top: 2rem; margin-right: 3rem;">--}}
+{{--        Jumlah Netto: Rp. {{number_format($total)}}--}}
+{{--    </div>--}}
+{{--    <div class="font-weight-bold" style="font-size: 18px; text-align: right; margin-top: 2rem; margin-right: 3rem;">--}}
+{{--        PPN (10%): Rp. {{number_format($total * 10/100)}}--}}
+{{--    </div>--}}
+    <div class="font-weight-bold mt-2" style="font-size: 12px">
+        Jumlah Tagihan (sudah termasuk ppn 10%): Rp. {{number_format($total)}}
     </div>
 </div>
 

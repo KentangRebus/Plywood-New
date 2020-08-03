@@ -27,9 +27,26 @@
                     </div>
                 @endif
             </div>
-            <div>
-                <a href="{{route('customer-insert-view')}}"><button class="btn btn-gradient-success">+ Tambah Customer</button></a>
+            <div class="row form-group">
+                <div class="col-md-8">
+                    <div>
+                        <a href="{{route('customer-insert-view')}}"><button class="btn btn-gradient-success">+ Tambah Customer</button></a>
+                    </div>
+
+                </div>
+                <form method="post" action="{{route('customer-search')}}" class="col-md-4 input-group">
+                    @csrf
+                    @if(!empty($query))
+                        <input name="name" type="text" class="form-control" placeholder="Nama Customer" aria-label="Product Name" aria-describedby="basic-addon2" value="{{$query}}">
+                    @else
+                        <input name="name" type="text" class="form-control" placeholder="Nama Customer" aria-label="Product Name" aria-describedby="basic-addon2">
+                    @endif
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-gradient-primary" type="submit">Search</button>
+                    </div>
+                </form>
             </div>
+
             <table class="table table-hover" style="table-layout: fixed;">
                 <thead>
                 <tr>

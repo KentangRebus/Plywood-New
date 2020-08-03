@@ -23,7 +23,7 @@ class TransactionHeaderController extends Controller
             return view('transaction.cashier.index');
 
 
-        $data = TransactionHeader::orderBy('is_done', 'asc')->orderBy('created_at', 'asc')->orderBy('due_date', 'asc')->paginate(10);
+        $data = TransactionHeader::orderBy('is_done', 'asc')->orderBy('created_at', 'desc')->orderBy('due_date', 'asc')->paginate(10);
         return view('transaction.index')->with(['data'=>$data]);
 
     }
@@ -178,8 +178,8 @@ class TransactionHeaderController extends Controller
         $data = TransactionHeader::where('created_at', 'like', "%$date%")
             ->where('invoice_number', 'like', "%$invoice_number%")
             ->orderBy('is_done', 'asc')
-            ->orderBy('created_at', 'asc')
             ->orderBy('due_date', 'asc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
 
