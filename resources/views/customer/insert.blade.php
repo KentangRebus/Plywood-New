@@ -26,6 +26,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="inputPhone">Nomor Telepon</label>
+                    <input type="text" class="form-control" name="phone" id="inputPhone" placeholder="Nomor Telepon">
+                </div>
+
+                <div class="form-group">
                     <label for="inputNIK">NIK (Optional)</label>
                     <input name="nik" type="text" class="form-control" id="inputNIK" placeholder="NIK">
                 </div>

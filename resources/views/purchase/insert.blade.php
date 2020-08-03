@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label for="inputStock">Name</label>
                     <input type="text" class="form-control" id="inputName" placeholder="Product Name" >
-                    <small id="productCode" class="form-text text-muted">Select the item from dropdown</small>
+                    <small id="productCode" class="form-text text-muted">Silahkan memilih produk yang tersedia</small>
                     <div>
                         <ul class="list-group" id="listName">
                         </ul>
@@ -131,49 +131,62 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="inputNewCode">Code</label>
-                                <input name="code" type="text" class="form-control" id="inputNewCode" placeholder="Code">
+                                <label for="inputCode">Kode</label>
+                                <input name="code" type="text" class="form-control" id="inputNewCode" placeholder="Kode">
                             </div>
                             <div class="form-group">
-                                <label for="inputNewName">Name</label>
-                                <input name="name" type="text" class="form-control" id="inputNewName" placeholder="Name" required>
+                                <label for="inputName">Nama</label>
+                                <input name="name" type="text" class="form-control" id="inputNewName" placeholder="Nama" required>
                             </div>
                             <div class="form-group">
-                                <label for="inputNewType">Type</label>
-                                <input name="type" type="text" class="form-control" id="inputNewType" placeholder="Type">
+                                <label for="inputType">Tipe</label>
+                                <input name="type" type="text" class="form-control" id="inputNewType" placeholder="Tipe">
                             </div>
 
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="inputNewUnit">Unit</label>
+                                <label for="inputUnit">Unit</label>
                                 <input name="unit" type="text" class="form-control" id="inputNewUnit" placeholder="Unit">
                             </div>
                             <div class="form-group">
-                                <label for="inputNewColor">Color</label>
-                                <input name="color" type="text" class="form-control" id="inputNewColor" placeholder="Color">
+                                <label for="inputBrand">Merek</label>
+                                <input name="brand" type="text" class="form-control" id="inputNewBrand" placeholder="Merel">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDescription">Deskripsi</label>
+                                <input name="description" type="text" class="form-control" id="inputNewDescription" placeholder="Deskripsi">
                             </div>
 
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputStock">Stock</label>
-                        <input name="stock" min="1" type="number" class="form-control" id="inputNewStock" placeholder="Number of Stocks" required>
+                        <label for="inputCategory">Kategori</label>
+                        <select class="form-control" id="inputNewCategory" name="category">
+                            @foreach($categories as $c)
+                                <option value="{{$c->id}}">{{$c->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputMinStock">Minimum Stock</label>
-                        <input name="minStock" min="1" type="number" class="form-control" id="inputNewMinStock" placeholder="Minimum Stock" required>
+                        <label for="inputStock">Persediaan</label>
+                        <input name="stock" min="1" type="number" class="form-control" id="inputNewStock" placeholder="Jumlah Persediaan" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputNewBuy">Buy Price</label>
+                        <label for="inputMinStock">Persediaan Minimum</label>
+                        <input name="minStock" min="1" type="number" class="form-control" id="inputNewMinStock" placeholder="Persediaan Minimum" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputBuy">Harga Modal</label>
                         <input name="buyPrice" min="0" type="number" class="form-control" id="inputNewBuy" placeholder="Rp." required>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputNewSell">Sell Price</label>
+                        <label for="inputSell">Harga Jual</label>
                         <input name="sellPrice" min="0" type="number" class="form-control" id="inputNewSell" placeholder="Rp." required>
                     </div>
                     <div id="errorText" class="form-group text-danger">
@@ -330,11 +343,13 @@
         function addNewProduct() {
             let data = {
                 "id" : '',
-                "name": '',
                 "code": '',
-                "color": '',
+                "name": '',
                 "type": '',
                 "unit": '',
+                "brand": '',
+                "description": '',
+                "category": '',
                 "stock": '',
                 "minStock": '',
                 "buyPrice": '',
@@ -358,16 +373,18 @@
             $('#errorText').html(errorTxt)
             
             if (errorTxt === '') {
-                data.name = name
                 data.code = $('#inputNewCode').val()
+                data.name = name
                 data.type = $('#inputNewType').val()
-                data.color = $('#inputNewColor').val()
-                data.unit = $('#inputNewUnit').val()
+                data.unit = $('#inputNewType').val()
+                data.brand = $('#inputNewBrand').val()
+                data.description = $('#inputNewDescription').val()
+                data.category = $('#inputNewCategory').val()
                 data.stock = stock
                 data.minStock = minStock
                 data.sellPrice = sellPrice
                 data.buyPrice = buyPrice
-
+                console.log(data)
                 allPurchaseData.push(data)
                 $('#purchaseProductList').append("\
                     <tr id='row"+data.id+"'>\

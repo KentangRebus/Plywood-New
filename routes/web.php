@@ -20,6 +20,10 @@ Route::post('/login', 'LoginController@doLogin' )->name('do-login');
 Route::group(['middleware' => ['auth']], function (){
     Route::get('/', 'DashboardController@index')->name('home');
 
+//  auto complete feature
+    Route::post('/product/autocomplete', 'SearchController@searchProduct')->name('product-autocomplete');
+    Route::post('/customer/autocomplete', 'SearchController@searchCustomer')->name('customer-autocomplete');
+
 //purchase routes
     Route::get('/product', 'ProductController@index')->name('product-view');
     Route::get('/product/add', 'ProductController@create')->name('product-insert-view');
@@ -32,7 +36,6 @@ Route::group(['middleware' => ['auth']], function (){
 
 
 //purchase routes
-    Route::post('/product/autocomplete', 'SearchController@searchProduct')->name('product-autocomplete');
     Route::get('/purchase', 'PurchaseHeaderController@index')->name('purchase-view');
     Route::get('/purchase/add', 'PurchaseHeaderController@create')->name('purchase-insert-view');
     Route::get('/purchase/{id}', 'PurchaseHeaderController@show')->name('purchase-detail-view');
@@ -47,8 +50,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::get('/transaction/{id}', 'TransactionHeaderController@show')->name('transaction-detail');
     Route::get('/transaction/print/{id}', 'TransactionHeaderController@print')->name('transaction-print');
 
+    Route::post('/transaction/paid/{id}', 'TransactionHeaderController@paid')->name('transaction-paid');
     Route::post('/transaction/add', 'TransactionHeaderController@store')->name('transaction-insert');
     Route::post('/transaction/delete', 'TransactionHeaderController@destroy')->name('transaction-delete');
+    Route::post('/transaction/search', 'TransactionHeaderController@search')->name('transaction-search');
 
 //    category route
     Route::get('/category', 'CategoryController@index')->name('category-view');

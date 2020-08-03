@@ -41,6 +41,7 @@ class CustomerController extends Controller
         $customer = new Customer();
         $customer->name = $request->name;
         $customer->address = $request->address;
+        $customer->phone = $request->phone;
         $customer->nik = $request->nik;
         $customer->npwp = $request->npwp;
         $customer->save();
@@ -57,7 +58,6 @@ class CustomerController extends Controller
     public function show($id)
     {
         $data = Customer::where('id', '=' ,$id)->first();
-
         return view('customer.detail')->with(['data'=>$data]);
     }
 
@@ -86,6 +86,7 @@ class CustomerController extends Controller
         $customer = Customer::where('id', '=' ,$id)->first();
         $customer->name = $request->name;
         $customer->address = $request->address;
+        $customer->phone = $request->phone;
         $customer->nik = $request->nik;
         $customer->npwp = $request->npwp;
         $customer->save();

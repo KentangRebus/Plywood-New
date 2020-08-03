@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->uuid('id');
             $table->string('name');
             $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->string('nik')->nullable();
             $table->string('npwp')->nullable();
             $table->integer('debt')->nullable();

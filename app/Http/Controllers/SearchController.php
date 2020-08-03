@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -23,4 +24,13 @@ class SearchController extends Controller
 
         return $data;
     }
+
+    public function searchCustomer(Request $request) {
+//        dd($request['query']);
+        $query = $request['query'];
+        $data = Customer::where('name', 'like', "%$query%")->take(7)->get();
+
+        return $data;
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use App\PurchaseDetail;
 use App\PurchaseHeader;
@@ -27,7 +28,8 @@ class PurchaseHeaderController extends Controller
      */
     public function create()
     {
-        return view('purchase.insert');
+        $categories = Category::all();
+        return view('purchase.insert')->with(['categories'=>$categories]);
     }
 
     /**
@@ -72,12 +74,14 @@ class PurchaseHeaderController extends Controller
                     'code' => $data->code,
                     'name' => $data->name,
                     'type' => $data->type,
+                    'brand' => $data->brand,
                     'unit' => $data->unit,
-                    'color' => $data->color,
+                    'description' => $data->description,
                 ];
-
+//                dd($format_name);
                 $prod->name = json_encode($format_name);
                 $prod->stock = $data->stock;
+                $prod->category_id = $data->category;
                 $prod->min_stock = $data->minStock;
                 $prod->buy_price = $data->buyPrice;
                 $prod->sell_price = $data->sellPrice;

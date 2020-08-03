@@ -70,11 +70,12 @@
                     @foreach($data->details as $d)
                         <tr>
                             <td class="text-truncate">
-                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->code}}
-                                {{json_decode($d->productDetail->name)->color}}
+                                {{json_decode($d->productDetail->name)->name}}
                                 {{json_decode($d->productDetail->name)->type}}
                                 {{json_decode($d->productDetail->name)->unit}}
+                                {{json_decode($d->productDetail->name)->brand}}
+                                {{json_decode($d->productDetail->name)->description}}
                             </td>
                             <td class="text-success">
                                 <i class="mdi mdi-arrow-up"></i>

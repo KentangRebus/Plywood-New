@@ -40,10 +40,34 @@
             </div>
             <form action="{{route('transaction-insert')}}" method="post">
                 @csrf
+
+                <div class="form-group">
+                    <label for="inputStock">Nama Customer</label>
+                    <input type="text" class="form-control" id="inputCustomerName" placeholder="Nama Customer" >
+                    <input type="hidden" name="customerId" id="customerId" value="">
+                    <div>
+                        <ul class="list-group" id="listCustomerName">
+                        </ul>
+                    </div>
+                    <small id="memberCode" class="form-text text-muted">silahkan pilih nama customer yang tersedia</small>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="inputTransactionDate">Tanggal Transaksi</label>
+                        <input name="createdAt" type="date" class="form-control" id="inputTransactionDate" placeholder="Tanggal Transaksi" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="inputInvoiceNumber">Nomor Faktur</label>
+                        <input name="invoiceNumber" type="text" class="form-control" id="inputInvoiceNumber" placeholder="Nomor Faktur" required>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputPaymentStatus">Payment Status</label>
+                            <label for="inputPaymentStatus">Status Pembayaran</label>
                             <select name="paymentStatus" class="form-control" id="inputPaymentStatus">
                                 <option value="Lunas">Lunas</option>
                                 <option value="Hutang">Hutang</option>
@@ -52,24 +76,25 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputDueDate">Due Date</label>
-                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Due Date" required>
+                            <label for="inputDueDate">Jatuh Tempo</label>
+                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Jatuh Tempo" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputStock">Need to Pay</label>
-                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Need to Pay" required>
+                    <label for="inputStock">Kekurangan</label>
+                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Rp." required>
                 </div>
+
                 <hr>
 
                 <div class="form-group">
-                    <label for="inputStock">Name</label>
+                    <label for="inputStock">Nama Produk</label>
                     <input type="text" class="form-control" id="inputName" placeholder="Product Name" >
-                    <small id="productCode" class="form-text text-muted">Select the item from dropdown</small>
+                    <small id="productCode" class="form-text text-muted">Silahkan pilih produk yang tersedia</small>
                     <div>
-                        <ul class="list-group" id="listName">
+                        <ul class="list-group" id="listProductName">
                         </ul>
                     </div>
                 </div>
@@ -77,13 +102,13 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputQuantity">Quantity</label>
+                            <label for="inputQuantity">Jumlah Pembelian</label>
                             <input name="quantity" min="1" max="10" type="number" class="form-control" id="inputQuantity" placeholder="Quantity">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <input type="hidden" name="canAdd" id="canAdd" value="false">
-                        <button type="button" class="btn btn-block btn-gradient-success mr-2" onclick="addProduct()">Add</button>
+                        <button type="button" class="btn btn-block btn-gradient-success mr-2" onclick="addProduct()">Tambah</button>
                     </div>
                 </div>
 
@@ -91,9 +116,9 @@
                     <table class="table table-hover" style="table-layout: fixed;">
                         <thead>
                         <tr>
-                            <th class="w-40">Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th class="w-40">Nama Produk</th>
+                            <th>Jumlah Pembelian</th>
+                            <th>Harga Satuan</th>
                             <th>Subtotal</th>
                             <th>Action</th>
                         </tr>
@@ -102,6 +127,12 @@
 
                         </tbody>
                     </table>
+                </div>
+                <div class="form-group">
+{{--                    <h5>Jumlah Netto: Rp.<span id="total"> 90,000 </span></h5>--}}
+{{--                    <h5>PPN (10%): Rp. <span id="ppn"> 9,000 </span></h5>--}}
+                    <input type="hidden" name="totals" value="0" id="totals">
+                    <h4 class="font-weight-bold">Total Tagihan: Rp. <span id="grandTotal"> </span></h4>
                 </div>
 
                 <div class="row">
@@ -131,8 +162,51 @@
     <script !src="">
         let allTransactionProduct = []
         let currItem = {}
+        let grandTotal = 0
 
         $(document).ready(function () {
+            $('#inputCustomerName').on('keyup', function () {
+                let query = $(this).val()
+                //ajax for auto complete
+                $.ajax({
+                    url: "{{route('customer-autocomplete')}}",
+                    type: "POST",
+                    data: {
+                        "_token": "{{csrf_token()}}",
+                        "query": query
+                    },
+                    success: function (data) {
+                        // console.log('Search Data', data)
+                        let htmlFormat = ''
+                        if (data.length > 0) {
+                            data.forEach(function (item) {
+                                htmlFormat += "<li class=\"list-group-item cursor-pointer customerList\" data-value='"+JSON.stringify(item)+"' onclick='console.log(this.id)'>"+item.name+"</li>"
+                            })
+                        }
+                        else {
+                            $('#memberCode').text('Nama Customer tidak ditemukan silahkan coba ulang')
+                            $('#memberCode').removeClass('text-success text-muted')
+                            $('#memberCode').addClass("text-danger")
+                        }
+                        $('#listCustomerName').html(htmlFormat)
+                    }
+                })
+            })
+
+            $(document).on('click', '.customerList', function(){
+                var value = $(this).text();
+                $('#inputCustomerName').val(value);
+                $('#listCustomerName').html("");
+
+                console.log('data', this.dataset.value)
+                let data = JSON.parse(this.dataset.value)
+
+                $('#customerId').val(data.id);
+                $('#memberCode').text(data.id)
+                $('#memberCode').removeClass('text-danger text-muted')
+                $('#memberCode').addClass("text-success")
+            });
+
             $('#inputPaymentStatus').change(function () {
                 if (this.value === "Hutang") {
                     $('#inputNeed').prop( "disabled", false );
@@ -146,12 +220,12 @@
 
             //disable enter
             $('#purchaseForm').on('keyup keypress', function(e) {
-                var keyCode = e.keyCode || e.which;
+                let keyCode = e.keyCode || e.which;
                 if (keyCode === 13 && !$(e.target).is('textarea')) {
-                    e.preventDefault();
-                    return false;
+                    e.preventDefault()
+                    return false
                 }
-            });
+            })
 
             $('#inputName').on('keyup', function () {
                 let query = $(this).val()
@@ -168,7 +242,7 @@
                         let htmlFormat = ''
                         if (data.length > 0) {
                             data.forEach(function (item) {
-                                htmlFormat += "<li class=\"list-group-item cursor-pointer\" data-value='"+JSON.stringify(item)+"' onclick='console.log(this.id)'>"+item.name+"</li>"
+                                htmlFormat += "<li class=\"list-group-item cursor-pointer productList\" data-value='"+JSON.stringify(item)+"' onclick='console.log(this.id)'>"+item.name+"</li>"
                             })
                         }
                         else {
@@ -177,7 +251,7 @@
                             $('#productCode').addClass("text-danger")
                             // $('#canAdd').val('false')
                         }
-                        $('#listName').html(htmlFormat)
+                        $('#listProductName').html(htmlFormat)
                     }
                 })
             })
@@ -185,10 +259,10 @@
             if ($('#printModal') !== undefined || $('#printModal') !== null )
                 $('#printModal').modal('show')
 
-            $(document).on('click', 'li', function(){
+            $(document).on('click', '.productList', function(){
                 var value = $(this).text();
                 $('#inputName').val(value);
-                $('#listName').html("");
+                $('#listProductName').html("");
 
                 // console.log('data', this.dataset.value)
                 let data = JSON.parse(this.dataset.value)
@@ -201,7 +275,10 @@
                 $('#productCode').addClass("text-success")
 
                 $('#canAdd').val('true')
-            });
+            })
+
+            setGrandTotal(0)
+
         })
         
         function addProduct() {
@@ -230,24 +307,27 @@
                     <td>Rp. "+currItem.sell_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+"</td>\
                     <td> Rp. "+(currItem.sell_price * $('#inputQuantity').val()).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")+"</td>\
                     <td>\
-                        <button type=\"button\" class=\"btn btn-gradient-danger btn-rounded btn-icon\" onclick=\"removeFromTable('"+currItem.id+"')\">\
+                        <button type=\"button\" class=\"btn btn-gradient-danger btn-rounded btn-icon\" onclick=\"removeFromTable('"+currItem.id+"', '"+currItem.sell_price * $('#inputQuantity').val()+"')\">\
                             <i class=\"mdi mdi-close\"></i>\
                         </button>\
                     </td>\
                 </tr>\
                 ")
 
+                setGrandTotal(currItem.sell_price * $('#inputQuantity').val())
                 $('#canAdd').val('false')
                 $('#inputQuantity').val('')
                 $('#inputName').val('')
             }
         }
 
-        function removeFromTable(id) {
+        function removeFromTable(id, subtotal) {
             allTransactionProduct.filter(function (item) {
                 return item.data.id === id
             })
             $('#row'+id).remove()
+            console.log('removeItem', this)
+            setGrandTotal(-subtotal)
         }
 
         function addFormData() {
@@ -256,6 +336,12 @@
         
         function openModal() {
             $('#printModal').modal('show');
+        }
+        
+        function setGrandTotal(price) {
+            grandTotal += price
+            $('#grandTotal').text(grandTotal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
+            $('#totals').val(grandTotal)
         }
     </script>
 

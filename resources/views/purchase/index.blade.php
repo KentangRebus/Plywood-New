@@ -21,17 +21,17 @@
                 @endif
             </div>
 
-            <a href="{{route('purchase-insert-view')}}"><button class="btn btn-gradient-success">+ Add Purchase</button></a>
+            <a href="{{route('purchase-insert-view')}}"><button class="btn btn-gradient-success">+ Tambah Pembelian</button></a>
 
             <div class="mt-3">
                 <table class="table table-hover" style="table-layout: fixed;">
                     <thead>
                     <tr>
-                        <th>Time</th>
-                        <th class="w-25">Code</th>
+                        <th>Tanggal</th>
+                        <th class="w-25">Kode</th>
                         <th>Status</th>
-                        <th>Need</th>
-                        <th>Due Date</th>
+                        <th>Kekurangan</th>
+                        <th>Jatuh Tempo</th>
                         <th>Action</th>
                     </tr>
                     </thead>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Product;
 use App\TransactionDetail;
 use App\TransactionHeader;
@@ -49,10 +50,18 @@ class TransactionHeaderController extends Controller
 //      create transaction header
         $transaction_header = new TransactionHeader();
         $transaction_header->staff_id = Auth::user()->id;
+        $transaction_header->invoice_number = $request->invoiceNumber;
+        $transaction_header->customer_id = $request->customerId;
+        $transaction_header->totals = $request->totals;
+        $transaction_header->created_at = $request->createdAt;
         if ($request->paymentStatus == "Hutang") {
             $transaction_header->is_done = false;
             $transaction_header->needs = $request->need;
             $transaction_header->due_date = $request->dueDate;
+
+            $customer = Customer::where('id', '=', $request->customerId)->first();
+            $customer->debt = $customer->debt == null ? 1 : $customer->debt+1;
+            $customer->save();
         }
         else {
             $transaction_header->is_done = true;
@@ -122,6 +131,20 @@ class TransactionHeaderController extends Controller
         //
     }
 
+    public function paid($id)
+    {
+        $transaction = TransactionHeader::where('id', '=', $id)->first();
+        $transaction->is_done = true;
+        $transaction->needs = 0;
+        $transaction->due_date = null;
+        $transaction->save();
+
+        $customer = Customer::where('id', '=', $transaction->customer_id)->first();
+        $customer->debt -= 1;
+
+        return redirect()->route('purchase-view')->with(['msg' => "Transaksi sudah dibayar"]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -141,6 +164,26 @@ class TransactionHeaderController extends Controller
 
         $transaction->delete();
         return redirect()->route('transaction-view')->with(['msg' => "Transaction has been deleted"]);
+    }
+
+    public function search(Request $request) {
+//        dd($request);
+        $date = $request->date ?? '';
+        $invoice_number = $request->invoiceNumber ?? '';
+        $searchData = [
+            "date" => $date,
+            "invoiceNumber" => $invoice_number
+        ];
+
+        $data = TransactionHeader::where('created_at', 'like', "%$date%")
+            ->where('invoice_number', 'like', "%$invoice_number%")
+            ->orderBy('is_done', 'asc')
+            ->orderBy('created_at', 'asc')
+            ->orderBy('due_date', 'asc')
+            ->paginate(10);
+
+
+        return view('transaction.index')->with(['data'=>$data, 'searchData'=>$searchData]);
     }
 
     public function print($id) {

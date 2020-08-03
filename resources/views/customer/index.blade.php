@@ -53,6 +53,7 @@
                                     </button>
                                 </a>
                             </div>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
                             <div class="mx-2">
                                 <a href="{{route('customer-update-view', ['id'=>$d->id])}}">
                                     <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
@@ -66,6 +67,7 @@
                                     <i class="mdi mdi-close"></i>
                                 </button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

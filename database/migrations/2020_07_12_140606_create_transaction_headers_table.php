@@ -21,6 +21,7 @@ class CreateTransactionHeadersTable extends Migration
             $table->boolean('is_done');
             $table->date('due_date')->nullable();
             $table->integer('needs')->nullable();
+            $table->integer('totals');
             $table->timestamps();
             $table->softDeletes();
 
