@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use PDF;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -86,13 +87,8 @@ class ProductController extends Controller
         }
 
         $categories = Category::all();
-
-        return view('product.index')->with(['data'=>$data, 'query' => $request['query'], 'categories'=>$categories]);
+        return view('product.index')->with(['data'=>$data, 'query' => $request['query'], 'categoryQuery'=>$searchCategory, 'categories'=>$categories]);
 //        return redirect()->route('product-view')->with(['data'=>$data, 'query' => $request['query']]);
-    }
-
-    public function filterQuery($value, $key, $query){
-        return !strpos($value, $query);
     }
 
     /**
@@ -149,5 +145,19 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product-view')->with(['msg' => "Product has been deleted"]);
+    }
+
+    public function print(Request $request) {
+        $category = $request->category;
+        $category = Category::where('id', '=', $category)->first();
+
+        if ($category == '' || $category == null)
+            $data = Product::all();
+        else
+            $data = Product::where('category_id', 'like', "%$category->id%")->get();
+
+        $pdf = PDF::loadView('product.invoice', ['data'=>$data, 'category' => $category->name]);
+        return $pdf->download("Stock.pdf");
+
     }
 }

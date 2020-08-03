@@ -39,7 +39,7 @@
 </head>
 <body class="p-3">
 <div>
-    <h2>PT Sinar Karunia Adi Jaya</h2>
+    <h2 style="margin-bottom: 1rem">PT Sinar Karunia Adi Jaya</h2>
     <div class="" style="font-size: 10px">Jl. Caman Raya no. 60, RT. 07 /  RW. 01, Jati Bening <br> Pondok Gede, Bekasi Kota, Jawa Barat, Indonesia</div>
     <div class="mt-1" style="font-size: 10px">Telp: (021) 2284 5271 / 2284 5278</div>
 </div>
@@ -84,15 +84,28 @@
         @endforeach
         </tbody>
     </table>
-{{--    <div class="font-weight-bold" style="font-size: 18px; text-align: right; margin-top: 2rem; margin-right: 3rem;">--}}
-{{--        Jumlah Netto: Rp. {{number_format($total)}}--}}
-{{--    </div>--}}
-{{--    <div class="font-weight-bold" style="font-size: 18px; text-align: right; margin-top: 2rem; margin-right: 3rem;">--}}
-{{--        PPN (10%): Rp. {{number_format($total * 10/100)}}--}}
-{{--    </div>--}}
-    <div class="font-weight-bold mt-2" style="font-size: 12px">
-        Jumlah Tagihan (sudah termasuk ppn 10%): Rp. {{number_format($total)}}
-    </div>
+    <table class="table" style="width: 100%">
+        <thead>
+            <tr>
+                <th class="font-weight-bold">Jumlah Netto</th>
+                <th class="font-weight-bold">PPN (10%)</th>
+                <th class="font-weight-bold">Jumlah Tagihan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Rp. {{number_format($total/11 * 10)}}
+                </td>
+                <td>
+                    Rp. {{number_format($total/11 * 1)}}
+                </td>
+                <td>
+                    Rp. {{number_format($total)}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

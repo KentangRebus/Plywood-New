@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/product/update/{id}', 'ProductController@update')->name('product-update');
     Route::post('/product/delete', 'ProductController@destroy')->name('product-delete');
     Route::post('/product/search', 'ProductController@show')->name('product-search');
+    Route::post('/product/print/', 'ProductController@print')->name('product-print');
 
 
 //purchase routes
@@ -74,6 +75,10 @@ Route::group(['middleware' => ['auth']], function (){
     Route::post('/customer/update/{id}', 'CustomerController@update')->name('customer-update');
     Route::post('/customer/delete/{id}', 'CustomerController@destroy')->name('customer-delete');
     Route::post('/customer/search', 'CustomerController@search')->name('customer-search');
+
+//   reporting
+    Route::get('/report', 'ReportController@index')->name('report-view');
+    Route::get('/report/stock/month', 'ReportController@monthlyStockReport')->name('report-stock-monthly');
 
 //    log out user
     Route::get('/logout', 'StaffController@logout')->name('logout');

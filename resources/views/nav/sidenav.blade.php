@@ -39,6 +39,12 @@
                     <i class="mdi mdi-cart menu-icon"></i>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('report-view')}}">
+                    <span class="menu-title">Laporan</span>
+                    <i class="mdi mdi-printer menu-icon"></i>
+                </a>
+            </li>
         @elseif(\Illuminate\Support\Facades\Auth::user()->role == "staff")
             <li class="nav-item">
                 <a class="nav-link" href="{{route('home')}}">

@@ -89,6 +89,16 @@
             <div>
                 {{$data->links()}}
             </div>
+            <div>
+                <form action="{{route('product-print')}}" method="post">
+                    <input type="hidden" name="category" value="{{$categoryQuery ?? ''}}">
+                    <input type="hidden" name="query" value="{{$query ?? ''}}">
+                    @csrf
+                    <button type="submit" class="btn btn-gradient-primary">
+                        Print
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 

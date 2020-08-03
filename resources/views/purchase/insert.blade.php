@@ -8,7 +8,7 @@
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
                       <i class="mdi mdi-archive"></i>
-                    </span> Add Purchase Transaction</h3>
+                    </span> Tambah Pembelian</h3>
     </div>
     <div class="card">
         <div class="card-body">
@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputPaymentStatus">Payment Status</label>
+                            <label for="inputPaymentStatus">Status Pembayaran</label>
                             <select name="paymentStatus" class="form-control" id="inputPaymentStatus">
                                 <option value="Lunas">Lunas</option>
                                 <option value="Hutang">Hutang</option>
@@ -27,21 +27,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="inputDueDate">Due Date</label>
-                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Due Date">
+                            <label for="inputDueDate">Jatuh Tempo</label>
+                            <input disabled="true" name="dueDate" type="date" class="form-control" id="inputDueDate" placeholder="Jatuh Tempo">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputStock">Need to Pay</label>
-                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Need to Pay" >
+                    <label for="inputStock">Kekurangan</label>
+                    <input disabled="true" name="need" min="1" type="number" class="form-control" id="inputNeed" placeholder="Kekurangan" >
 
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label for="inputStock">Name</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Product Name" >
+                    <label for="inputStock">Nama Produk</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Nama Produk" >
                     <small id="productCode" class="form-text text-muted">Silahkan memilih produk yang tersedia</small>
                     <div>
                         <ul class="list-group" id="listName">
@@ -52,14 +52,14 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputStock">Added Stock</label>
-                            <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Number of stock">
+                            <label for="inputStock">Penambahan Stock</label>
+                            <input name="stock" min="1" type="number" class="form-control" id="inputStock" placeholder="Penambahan Stock">
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputMinStock">Minimum Stock</label>
-                            <input disabled name="minStock" min="1" type="number" class="form-control" id="inputMinStock" placeholder="Minimum stock">
+                            <label for="inputMinStock">Stock Minimal</label>
+                            <input disabled name="minStock" min="1" type="number" class="form-control" id="inputMinStock" placeholder="Stock Minimal">
                         </div>
                     </div>
                 </div>
@@ -67,34 +67,34 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputBuy">Buy Price</label>
+                            <label for="inputBuy">Harga Modal</label>
                             <input disabled name="buyPrice" min="0" type="number" class="form-control" id="inputBuy" placeholder="Rp.">
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="inputSell">Sell Price</label>
+                            <label for="inputSell">Harga Jual</label>
                             <input disabled name="sellPrice" min="0" type="number" class="form-control" id="inputSell" placeholder="Rp.">
                         </div>
                     </div>
                     <div class="col-md-2 align-self-center justify-content-center">
                         <input type="hidden" name="canAdd" id="canAdd">
-                        <button type="button" class="btn btn-block btn-gradient-success mr-2" onclick="addExistingProduct()">Add</button>
+                        <button type="button" class="btn btn-block btn-gradient-success mr-2" onclick="addExistingProduct()">Tambah</button>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button type="button" class="btn btn-block btn-gradient-primary" data-toggle="modal" data-target="#modalNewProduct">+ Add New Product</button>
+                    <button type="button" class="btn btn-block btn-gradient-primary" data-toggle="modal" data-target="#modalNewProduct">+ Tambah Produk Baru</button>
                 </div>
 
                 <div class="form-group">
                     <table class="table table-hover" style="table-layout: fixed;">
                         <thead>
                         <tr>
-                            <th class="w-40">Name</th>
-                            <th>Added Stock</th>
-                            <th>Buy Price</th>
-                            <th>Sell Price</th>
+                            <th class="w-40">Nama Produk</th>
+                            <th>Penambahan Stock</th>
+                            <th>Harga Modal</th>
+                            <th>Harga Jual</th>
                             <th>Action</th>
                         </tr>
                         </thead>

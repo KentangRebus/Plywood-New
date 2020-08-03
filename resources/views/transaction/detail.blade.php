@@ -118,11 +118,10 @@
                 </div>
                 <div>
                     @if($data->is_done == 0)
-                        <a href="{{route('transaction-paid', ['id'=>$data->id])}}">
-                            <button class="btn btn-block btn-success">
-                                Paid
-                            </button>
-                        </a>
+                        <form action="{{route('transaction-paid', ['id'=>$data->id])}}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-block btn-gradient-success">Paid</button>
+                        </form>
                     @endif
                 </div>
             </div>

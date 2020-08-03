@@ -8,7 +8,7 @@
         <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white mr-2">
                       <i class="mdi mdi-archive"></i>
-                    </span> Purchase Transaction Detail</h3>
+                    </span> Detail Pembelian</h3>
     </div>
     <div class="card">
         <div class="card-body">
@@ -23,7 +23,7 @@
 
             <div>
                 <div class="form-group">
-                    <h4>Purchase Code:</h4>
+                    <h5 class="font-weight-bold">Kode Pembelian</h5>
                     <div>
                         {{$data->id}}
                     </div>
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <h4>Due Date:</h4>
+                            <h5 class="font-weight-bold">Jatuh Tempo:</h5>
                             <div>
                                 @if($data->is_done == 0)
                                     {{$data->due_date}}
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <h4>Need to Pay:</h4>
+                            <h5 class="font-weight-bold">Kekurangan:</h5>
                             <div>
                                 @if($data->is_done == 0)
                                     Rp. {{number_format($data->needs,0)}}
@@ -60,9 +60,9 @@
                 <table class="table table-hover" style="table-layout: fixed;">
                     <thead>
                     <tr>
-                        <th class="w-50">Name</th>
-                        <th>Quantity</th>
-                        <th>Buy Price</th>
+                        <th class="w-50">Nama Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga Modal</th>
                         <th>Subtotal</th>
                     </tr>
                     </thead>

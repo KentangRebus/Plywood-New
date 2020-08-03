@@ -141,6 +141,7 @@ class TransactionHeaderController extends Controller
 
         $customer = Customer::where('id', '=', $transaction->customer_id)->first();
         $customer->debt -= 1;
+        $customer->save();
 
         return redirect()->route('purchase-view')->with(['msg' => "Transaksi sudah dibayar"]);
     }
@@ -194,7 +195,6 @@ class TransactionHeaderController extends Controller
         }
         $pdf = PDF::loadView('transaction.invoice', ['data'=>$data, 'total' => $total]);
         return $pdf->download("invoice[$id].pdf");
-//        return view('transaction.invoice')->with(['data'=>$data, 'total' => $total]);
     }
 
 
